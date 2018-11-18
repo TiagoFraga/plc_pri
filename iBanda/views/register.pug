@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-pale-green
+            h2 Registo de Utilizador
+        .w3-container
+            form.w3-container(id='registoUtilizador')
+                fieldset
+                    legend 
+                        b Novo Utilizador:
+                    br
+                    label.w3-text-pale-green
+                        b Username:
+                    input.w3-input.w3-border.w3-light-grey(type='text', id='id_user')
+                    br
+                    label.w3-text-pale-green
+                        b Name:
+                    input.w3-input.w3-border.w3-light-grey(type='text', id='user_name')
+                    br
+                    label.w3-text-pale-green
+                        b E-mail:
+                    input.w3-input.w3-border.w3-light-grey(type='email', id='mail')
+                    br
+                    label.w3-text-pale-green
+                        b Password:
+                    input.w3-input.w3-border.w3-light-grey(type='password', id='pass')
+                    br
+                    label.w3-text-pale-green
+                        b Confirm Password:
+                    input.w3-input.w3-border.w3-light-grey(type='password', id='confirm-pass')
+                    br
+                    label.w3-label(id='message') 
+                    br
+                    fieldset
+                        legend 
+                            b Type:
+                        table.w3-table-all
+                            tr
+                                td
+                                    label.w3-text-pale-green
+                                        b Produtor
+                                    | &nbsp;
+                                    | &nbsp;
+                                    input.w3-btn.w3-light-grey(type='radio', name='tipo',id= 'type',value='Produtor')
+                                td
+                                    label.w3-text-pale-green
+                                        b Consumidor
+                                    | &nbsp;
+                                    | &nbsp;
+                                    input.w3-btn.w3-light-grey(type='radio', name='tipo',id= 'type',value='Consumidor')
+                    br
+                    br
+                    button.w3-button.w3-round.w3-pale-green(id='adicionar', class = 'enable') Adicionar Utilizador                     
+                br
+            footer.w3-container.w3-pale-green
+                address Gerado por iBanda App.

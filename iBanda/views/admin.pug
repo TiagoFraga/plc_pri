@@ -1,0 +1,22 @@
+extends layout
+block content
+  .w3-card-4
+    header.w3-container.w3-pale-green
+        h1 Gestão de Utilizadores
+    .w3-container
+        .w3-row
+            .w3-col.m4.l3
+                h3 Operações disponíveis:
+                ul.w3-ul.w3-border
+                    li
+                        button.w3-button.w3-pale-green(id='q1') Q1: Lista Utilizadores
+                    li
+                        button.w3-button.w3-pale-green Utilizador com o id:
+                        input.w3-input.w3-border(id='q2' placeholder='Introduza o id de um utilizador')
+            .w3-col.m8.l9
+                h3 Lista
+                .w3-container
+                    ol(id='resultados')
+        br
+    footer.w3-container.w3-pale-green
+        address Gerado por iBanda App.

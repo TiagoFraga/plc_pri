@@ -9,18 +9,29 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// Base de Dados (Falta editar conexão)
+
+var mongoose = require('mongoose')
+
+
+mongoose
+  .connect('mongodb://127.0.0.1:27017/iBanda', {useNewUrlParser: true})
+  .then(() => console.log('Mongo status: ' + mongoose.connection.readyState))
+  .catch(() => console.log('Mongo: erro na conexão.'))
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
