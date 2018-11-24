@@ -5,53 +5,35 @@ block content
         header.w3-pale-green
             h2 Registo de Utilizador
         .w3-container
-            form.w3-container(id='registoUtilizador')
-                fieldset
-                    legend 
-                        b Novo Utilizador:
-                    br
-                    label.w3-text-pale-green
-                        b Username:
-                    input.w3-input.w3-border.w3-light-grey(type='text', id='id_user')
-                    br
-                    label.w3-text-pale-green
-                        b Name:
-                    input.w3-input.w3-border.w3-light-grey(type='text', id='user_name')
-                    br
-                    label.w3-text-pale-green
-                        b E-mail:
-                    input.w3-input.w3-border.w3-light-grey(type='email', id='mail')
-                    br
-                    label.w3-text-pale-green
-                        b Password:
-                    input.w3-input.w3-border.w3-light-grey(type='password', id='pass')
-                    br
-                    label.w3-text-pale-green
-                        b Confirm Password:
-                    input.w3-input.w3-border.w3-light-grey(type='password', id='confirm-pass')
-                    br
-                    label.w3-label(id='message') 
-                    br
-                    fieldset
-                        legend 
-                            b Type:
-                        table.w3-table-all
-                            tr
-                                td
-                                    label.w3-text-pale-green
-                                        b Produtor
-                                    | &nbsp;
-                                    | &nbsp;
-                                    input.w3-btn.w3-light-grey(type='radio', name='tipo',id= 'type',value='Produtor')
-                                td
-                                    label.w3-text-pale-green
-                                        b Consumidor
-                                    | &nbsp;
-                                    | &nbsp;
-                                    input.w3-btn.w3-light-grey(type='radio', name='tipo',id= 'type',value='Consumidor')
-                    br
-                    br
-                    button.w3-button.w3-round.w3-pale-green(id='adicionar', class = 'enable') Adicionar Utilizador                     
+            form.w3-container(method="POST" action="/users/register")
+                input.w3-input(type="text" name="_id" placeholder="Username:")
                 br
+                input.w3-input(type="text" name="nome" placeholder="Nome:")
+                br
+                input.w3-input(type="email" name="email" placeholder="E-mail")
+                br
+                input.w3-input(type="password" name="password" id='pass' placeholder="Password:")
+                br
+                input.w3-input(type="password" name="confirm-Password" id='confirm-pass' placeholder="Confirm Password:")
+                br
+                label.w3-label(id='message') 
+                br
+                table.w3-table-all
+                    tr
+                        td
+                            label.w3-text-pale-green
+                                b Produtor
+                                | &nbsp;
+                                | &nbsp;
+                                input.w3-btn.w3-light-grey(type='radio', name='userType',id= 'type',value='Produtor')
+                        td
+                            label.w3-text-pale-green
+                                b Consumidor
+                                | &nbsp;
+                                | &nbsp;
+                                input.w3-btn.w3-light-grey(type='radio', name='userType',id= 'type',value='Consumidor')
+                br
+                input.w3-btn.w3-pale-green(type="submit" value="Registar" id='adicionar' class = 'enable')                    
+            br
             footer.w3-container.w3-pale-green
                 address Gerado por iBanda App.

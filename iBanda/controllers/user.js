@@ -12,6 +12,17 @@ Users.list = () => {
 Users.getUserID = a => {
     var userId = new RegExp(a, "i")
     return User
-        .find({_id: userId})
+        .findOne({_id: userId})
         .exec()
+}
+
+Users.inserir = u => {
+    var user = new User({
+        _id: u._id,
+        password: u.password,
+        name: u.nome,
+        email: u.email,
+        userType: u.userType
+    })
+    return User.create(user)
 }
