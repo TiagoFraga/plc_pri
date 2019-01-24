@@ -17,6 +17,11 @@ require('./autenticacao/aut')
 var indexRouter = require('./routes')
 var adminRouter = require('./routes/admin')
 var adminAPIRouter = require('./routes/api/admin')
+var produtorRouter = require('./routes/produtor')
+var produtorAPIRouter = require('./routes/api/produtor')
+var consumidorRouter = require('./routes/consumidor')
+var consumidorAPIRouter = require('./routes/api/consumidor')
+
 
 
 var app = express();
@@ -58,6 +63,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter)
 app.use('/api/admin', adminAPIRouter)
 app.use('/admin', adminRouter)
+//app.use('/produtor',produtorRouter)
+//app.use('/consumidor',consumidorRouter)
+//app.user('/api/produtor',produtorAPIRouter)
+//app.user('/api/consumidor',consumidorAPIRouter)
 
 
 // catch 404 and forward to error handler

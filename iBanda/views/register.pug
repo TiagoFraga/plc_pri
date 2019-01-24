@@ -5,7 +5,7 @@ block content
         header.w3-pale-green
             h2 Registo de Utilizador
         .w3-container
-            form.w3-container(method="POST" action="/admin/register")
+            form.w3-container(method="POST" action="/admin/regista")
                 input.w3-input(type="text" name="username" placeholder="Username:")
                 br
                 input.w3-input(type="text" name="nome" placeholder="Nome:")
@@ -32,6 +32,12 @@ block content
                                 | &nbsp;
                                 | &nbsp;
                                 input.w3-btn.w3-light-grey(type='radio', name='userType',id= 'type',value='Consumidor')
+                        td
+                            label.w3-text-pale-green
+                                b Admin
+                                | &nbsp;
+                                | &nbsp;
+                                input.w3-btn.w3-light-grey(type='radio', name='userType',id= 'type',value='Admin')
                 br
                 input.w3-btn.w3-pale-green(type="submit" value="Registar" id='adicionar' class = 'enable')                    
             br

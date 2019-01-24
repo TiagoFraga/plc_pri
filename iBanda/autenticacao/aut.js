@@ -12,7 +12,7 @@ passport.use('login',new localStrategy({
     passwordField: 'password'
 },async (u,p,done) =>{
     try{
-        user = await UserModel.findOne({username: u})
+        user = await UserModel.findOne({_id: u})
         if(!user){
             return done(null,false,{message: 'Utilizador não encontrado!'})
         }
@@ -47,24 +47,11 @@ var extractFromSession = (req) => {
     return token
 }
 
-passport.use('jwt', new JWTstrategy({
-    secretOrKey: "pri2018",
-    jwtFromRequest: ExtractJWT.fromExtractors([extractFromSession])
-}, async (token,done) => {
-    try{ 
-        return done(null, token.user)
-    }
-    catch (erro) {
-        return done(erro)
-    }
-}))
-
 passport.use('isAdmin',new JWTstrategy({
     secretOrKey: "pri2018",
     jwtFromRequest: ExtractJWT.fromExtractors([extractFromSession])
 },async(token,done)=>{
     try {
-        console.log(token.user)
         if(token.user.userType == 'Admin'){
             return done(null,token.user)
         } 
@@ -81,7 +68,6 @@ passport.use('isProdutor',new JWTstrategy({
     jwtFromRequest: ExtractJWT.fromExtractors([extractFromSession])
 },async(token,done)=>{
     try {
-        console.log(token.user)
         if(token.user.userType == 'Produtor'){
             return done(null,token.user)
         } 
@@ -99,7 +85,6 @@ passport.use('isConsumidor',new JWTstrategy({
     jwtFromRequest: ExtractJWT.fromExtractors([extractFromSession])
 },async(token,done)=>{
     try {
-        console.log(token.user)
         if(token.user.userType == 'Consumidor'){
             return done(null,token.user)
         } 

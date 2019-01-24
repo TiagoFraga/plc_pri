@@ -11,7 +11,7 @@ Users.listar = () => {
 
 Users.consultar = uname => {
     return User
-        .findOne({username: uname})
+        .findOne({_id: uname})
         .exec()
 }
 
@@ -19,10 +19,6 @@ Users.listarTipo = tipo => {
     return User
         .findOne({userType: tipo})
         .exec()
-}
-
-Users.validaPassword = password =>{
-    return User.isValidPassword(password)
 }
 
 Users.inserir = async u => {
