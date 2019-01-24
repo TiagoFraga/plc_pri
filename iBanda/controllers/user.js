@@ -1,24 +1,35 @@
 var User = require('../models/user')
-
+var bcrypt = require('bcrypt')
 const Users = module.exports
 
-// Devolve a lista de pubs em JSON
-Users.list = () => {
+// Devolve a lista de Users em JSON
+Users.listar = () => {
     return User
         .find()
         .exec()
 }
 
-Users.getUserID = a => {
-    var userId = new RegExp(a, "i")
+Users.consultar = uname => {
     return User
-        .findOne({_id: userId})
+        .findOne({username: uname})
         .exec()
 }
 
-Users.inserir = u => {
+Users.listarTipo = tipo => {
+    return User
+        .findOne({userType: tipo})
+        .exec()
+}
+
+Users.validaPassword = password =>{
+    return User.isValidPassword(password)
+}
+
+Users.inserir = async u => {
+    var hash = await bcrypt.hash(u.password, 10)
+    u.password = hash
     var user = new User({
-        _id: u._id,
+        _id: u.username,
         password: u.password,
         name: u.nome,
         email: u.email,
@@ -26,3 +37,17 @@ Users.inserir = u => {
     })
     return User.create(user)
 }
+
+
+Users.remove = username =>{
+    User.findByIdAndRemove(username,(erro,doc) =>{
+        if(!erro){
+            console.log('Utilizador removido com sucesso')
+        }
+        else{
+            console.log('Não consegui remover utilizador')
+        }
+        return doc
+    })
+} 
+

@@ -1,0 +1,15 @@
+{
+  "name": "povoamento",
+  "version": "1.0.0",
+  "description": "Povoamento Mongo Com Obras de Base",
+  "main": "povoamento.js",
+  "scripts": {
+    "test": "node povoamento.js"
+  },
+  "author": "João Gomes e Tiago Fraga",
+  "license": "ISC",
+  "dependencies": {
+    "jsonfile": "^5.0.0",
+    "mongoose": "^5.4.6"
+  }
+}
