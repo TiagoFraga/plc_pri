@@ -17,7 +17,7 @@ router.get('/regista',passport.authenticate('isAdmin',{session:false}),(req, res
 
 router.post('/regista',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     console.dir(req.body)
-    axios.post('http://localhost:9009/api/admin', req.body)
+    axios.post('http://localhost:9009/api/admin/registo', req.body)
         .then(()=> res.redirect('http://localhost:9009/admin'))
         .catch(erro => {
             console.log('Erro na inserção do Utilizador: ' + erro)

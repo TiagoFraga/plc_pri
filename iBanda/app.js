@@ -65,8 +65,8 @@ app.use('/api/admin', adminAPIRouter)
 app.use('/admin', adminRouter)
 //app.use('/produtor',produtorRouter)
 //app.use('/consumidor',consumidorRouter)
-//app.user('/api/produtor',produtorAPIRouter)
-//app.user('/api/consumidor',consumidorAPIRouter)
+app.use('/api/produtor',produtorAPIRouter)
+app.use('/api/consumidor',consumidorAPIRouter)
 
 
 // catch 404 and forward to error handler
