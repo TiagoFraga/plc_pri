@@ -38,7 +38,6 @@ passport.deserializeUser(function(user, done) {
     })
 })
   
-
 // Verificação do Token
 
 var extractFromSession = (req) => {

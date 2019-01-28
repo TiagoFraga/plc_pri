@@ -22,5 +22,8 @@
     "pug": "2.0.0-beta11",
     "session-file-store": "^1.2.0",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
