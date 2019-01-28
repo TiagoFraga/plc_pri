@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt-nodejs')
 var Schema = mongoose.Schema
 
 
@@ -18,6 +18,8 @@ UserSchema.methods.isValidPassword = async function(password){
     var compare = await bcrypt.compare(password,user.password)
     return compare
 }
+
+
 
 
 module.exports = mongoose.model('User',UserSchema,'users')

@@ -5,8 +5,7 @@ var ExtractJWT = require('passport-jwt').ExtractJwt
 var UserModel = require('../models/user')
 
 
-// Login de Utilizado
-
+// Login de Utilizador
 passport.use('login',new localStrategy({
     usernameField: 'username',
     passwordField: 'password'
@@ -38,8 +37,8 @@ passport.deserializeUser(function(user, done) {
     })
 })
   
-// Verificação do Token
 
+// Verificação do Token
 var extractFromSession = (req) => {
     var token = null
     if(req && req.session) token = req.session.token

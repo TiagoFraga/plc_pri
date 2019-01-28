@@ -15,7 +15,6 @@ Obras.consultar = id =>{
         .findOne({_id: id})
         .exec()
 }
-
 // Função para listar todas as obras por tipo
 Obras.listarTipo = tipo =>{
     return Obra
@@ -23,7 +22,7 @@ Obras.listarTipo = tipo =>{
         .exec()
 }
 
-// Função para inserir  uma obra (Falta Testar)
+// Função para inserir uma obra (Falta Testar)
 Obras.insere = o =>{
     if(o.arranjo){
         if(o.instrumentos){
@@ -101,6 +100,7 @@ Obras.atualiza = o =>{
                titulo: o.titulo,
                tipo: o.tipo,
                compositor: o.compositor,
+               arranjo: o.arranjo,
                instrumentos : o.instrumentos
            })
         }
@@ -109,30 +109,32 @@ Obras.atualiza = o =>{
                 _id: o._id,
                 titulo: o.titulo,
                 tipo: o.tipo,
-                compositor: o.compositor
+                compositor: o.compositor,
+                arranjo: o.arranjo
             })
         }
     }
     
-    return Obra.findByIdAndUpdate(o._id,obra,{new: true},(erro,doc)=>{
+    Obra.findByIdAndUpdate(o._id,obra,{new: true},(erro,doc)=>{
         if(!erro){
             console.log('Utilizador atualizado com sucesso')
         }
         else{
             console.log('Não consegui atualizar utilizador')
-        } 
+        }
+        return doc 
     })
 }
 
 // Função para remover uma dada obra (Falta Testar)
 Obras.remove = id =>{
-    return Obra.findByIdAndRemove(id,{old: true},(erro,doc) =>{
+    Obra.findByIdAndRemove(id,(erro,doc) =>{
         if(!erro){
             console.log('Utilizador removido com sucesso')
         }
         else{
             console.log('Não consegui remover utilizador')
         }
-        
+        return doc
     })
 }

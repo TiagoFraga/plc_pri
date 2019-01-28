@@ -2,9 +2,9 @@ var express = require('express')
 var router = express.Router()
 var User = require('../../controllers/user')
 var Obra = require('../../controllers/obra')
-var Noticia = require('../../controllers/noticia')
 
-// Rotas Obras 
+
+//**************************** Obras **********************************************
 
 // Rota da api para listar todas as obras
 router.get('/obras/listar',(req,res) =>{
@@ -34,7 +34,6 @@ router.get('/obras/remove/:obra',(req,res) =>{
         .catch(erro => res.status(500).send('Erro na remoção da Obra: ' + erro))
 })
 
-
 // Rota da api para atualizar uma obra na base de dados
 router.post('/obras/atualiza',(req,res)=>{
     Obra.atualiza(req.body)
@@ -43,7 +42,7 @@ router.post('/obras/atualiza',(req,res)=>{
 })
 
 
-// Rotas Users
+//**************************** Utilizadores **********************************************
 
 // Rota da api para listar todos  os utilizadores
 router.get('/users/listar',(req,res) =>{
@@ -67,12 +66,12 @@ router.get('/users/listar/tipo/:tipo',(req,res) =>{
 })
 
 // Rota da api para registar um utilizador na base de dados
-router.post('/registo',(req,res) => {
+//Alterar a rota !!!!!!!!!
+router.post('/users/regista',(req,res) => {
     User.inserir(req.body)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na inserção do Utilizador: ' + erro))
 })
-
 
 // Rota da api para remover um utilizador da base de dados
 router.get('/users/remove/:user',(req,res) =>{
@@ -81,14 +80,14 @@ router.get('/users/remove/:user',(req,res) =>{
         .catch(erro => res.status(500).send('Erro na remoção do Utilizador: ' + erro))
 })
 
-// Rota da api para Atualizar um utilizador na base de dados
+// Rota da api para atualizar um utilizador na base de dados
 router.post('/users/atualiza',(req,res)=>{
     User.atualiza(req.body)
       .then(dados => res.jsonp(dados))
       .catch(erro => res.status(500).send('Erro na atualização da Obra: ' + erro))
 })
 
-// Rotas gestão de Noticias 
+//**************************** Noticias **********************************************
 
 // Rota da api para  Listar todas as notícias 
 router.get('/noticia/listar',(req,res) =>{
@@ -123,6 +122,58 @@ router.get('/noticia/visibilidade/:id',(req,res) =>{
     Noticia.alteraVisibilidade(req.params.id)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na alteração de visibilidade da Notícia: ' + erro))
+})
+
+
+//**************************** Eventos **********************************************
+
+// Lista todos os Eventos
+router.get('/eventos/listar',(req,res) =>{
+    Evento.listar()
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na listagem dos Eventos: ' + erro))
+})
+
+// Lista os Eventos por um dado tipo
+router.get('/eventos/listar/tipo/:tipo',(req,res) =>{
+    Evento.listarTipo(req.params.tipo)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na listagem dos Eventos: ' + erro))
+})
+
+// Lista os Eventos por ordem decrescente, maiores que uma dada data
+router.get('/eventos/listar/data/:data',(req,res) =>{
+    Evento.listarData(req.params.data)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na listagem dos Eventos: ' + erro))
+})
+
+// Lista todos os Eventos de uma data especifica
+router.get('/eventos/listar/dataExacta/:data',(req,res) =>{
+    Evento.listarDataExacta(req.params.data)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na listagem dos Eventos: ' + erro))
+})
+
+// Lista a informação de um Evento dado um id 
+router.get('/eventos/listar/consultar/:id',(req,res) =>{
+    Evento.consultar(req.params.id)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na listagem dos Eventos: ' + erro))
+})
+
+// Insere um novo evento
+router.post('/eventos/inserir',(req,res) => {
+    Evento.inserir(req.body)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
+})
+
+// Atualiza um evento, dado um evento completo
+router.post('/eventos/atualizar',(req,res) => {
+    Evento.atualizar(req.body)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na atualização do Evento: ' + erro))
 })
 
 module.exports = router;

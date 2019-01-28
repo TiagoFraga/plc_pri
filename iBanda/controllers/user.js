@@ -1,5 +1,5 @@
 var User = require('../models/user')
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt-nodejs')
 const Users = module.exports
 
 // Função para listar todos os utilizadores
@@ -34,43 +34,19 @@ Users.inserir = async u => {
         email: u.email,
         userType: u.userType
     })
-
     return User.create(user)
 }
 
 // Função para remover um dado utilizador 
 Users.remove = username =>{
-    return User.findByIdAndRemove(username,(erro,doc) =>{
+    User.findByIdAndRemove(username,(erro,doc) =>{
         if(!erro){
             console.log('Utilizador removido com sucesso')
         }
         else{
             console.log('Não consegui remover utilizador')
         }
-        
+        return doc
     })
-}
-
-// Função para atualizar um dado utilizador
-Users.atualiza = async u =>{
-    var hash = await bcrypt.hash(u.password, 10)
-    u.password = hash
-   var newUser = new User({
-        _id: u.username,
-        password: u.password,
-        name: u.nome,
-        email: u.email,
-        userType: u.userType
-   })
-   return User.findByIdAndUpdate(u.username,newUser,{new: true},(erro,doc)=>{
-        if(!erro){
-            console.log('Utilizador atualizado com sucesso')
-        }
-        else{
-            console.log('Não consegui atualizar utilizador')
-        }
- 
-})
 } 
-
 
