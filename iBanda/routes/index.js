@@ -6,13 +6,20 @@ var jwt = require('jsonwebtoken')
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  res.render('index',{title: 'OKOK'})
+  res.render('index')
+})
+
+router.get('/sobre', (req, res) => {
+  res.render('sobre')
+})
+
+router.get('/contactos', (req, res) => {
+  res.render('contactos')
 })
 
 router.get('/login', (req,res) => {
   res.render('login')
 })
-
 
 router.post('/login', async (req,res,next) => {
   passport.authenticate('login', async (err,user,info)=> {
