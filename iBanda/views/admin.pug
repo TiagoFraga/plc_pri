@@ -4,66 +4,73 @@ block content
   .w3-container.w3-center.w3-jumbo
     header.w3-container.w3-dark-grey
       h1 iBanda
-    .w3-container
+  .w3-container.w3-large
+    .w3-bar.w3-black.w3-mobile
+      .w3-bar-item.w3-button.w3-right.w3-wide(action='/login', method='GET') Logout
+  .w3-container
             .w3-row
                 .w3-col.m4.l3       
-                    .w3-side-bar.w3-bar-block.w3-collapse.w3-theme-l5.w3-large
-                        h3.w3-bar-item.w3-center.w3-text-teal 
-                            b Menu
-                        ul.w3-ul
+                    .w3-side-bar.w3-bar-block.w3-large.w3-black
+                        .w3-bar-item.w3-center
+                          h2 
+                            b Utilizadores
+                          ul.w3-ul
+                            li 
+                              form.w3-container(action='/admin/users/registar',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Registar')
+                            li 
+                              form.w3-container(action='/admin/users/listar',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Listar')
+                        hr
+                        .w3-bar-item.w3-center
+                            h2
+                              b Obras
+                            ul.w3-ul
+                              li
+                                form.w3-container(action='/admin/obras/listar',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Listar')
+                              li
+                                form.w3-container(action='/admin/obras/exportar',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
+                        hr
+                        .w3-bar-item.w3-center
+                            h2 
+                              b Noticias
+                            ul.w3-ul
+                              li
+                                form.w3-container(action='/admin/noticias/adicionar',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
+                              li
+                                form.w3-container(action='/admin/noticias/listar',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Listar')
+                        hr
+                        .w3-bar-item.w3-center 
+                          h2
+                            b Eventos
+                          ul.w3-ul
                             li
-                                form.w3-container(action='/python',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Run Script Python')
+                              form.w3-container(action='/admin/eventos/adicionar',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
                             li
-                                form.w3-container(action='/users',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Users',id='users')
+                              form.w3-container(action='/admin/eventos/listar',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Listar')
                             li
-                                form.w3-container(action='/users/history',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Users History')
+                              form.w3-container(action='/admin/eventos/exportar',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
+                        hr
+                        .w3-bar-item.w3-center 
+                          h3
+                            b Estatistica
+                          ul.w3-ul
                             li
-                                form.w3-container(action='/tablespaces',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Tablespaces')
+                                form.w3-container(action='/admin/logs/visualizacao',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Visualizar')
                             li
-                                form.w3-container(action='/tablespaces/history',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Tablespaces History')
-                            li
-                                form.w3-container(action='/datafiles',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Datafiles')
-                            li
-                                form.w3-container(action='/datafiles/history',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Datafiles History')
-                            li
-                                form.w3-container(action='/sessions',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Sessions')
-                            li
-                                form.w3-container(action='/sessions/history',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Sessions History')
-                            li
-                                form.w3-container(action='/memory',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Memory')
-                            li
-                                form.w3-container(action='/memory/cdb',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Memory By PGA')
-                            li
-                                form.w3-container(action='/memory/dba',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Memory PGA and SGA')
-                            li
-                                form.w3-container(action='/memory/dataStorage',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Memory Data Storage')
-                            li
-                                form.w3-container(action='/memory/history',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Memory History')
-                            li
-                                form.w3-container(action='/roles',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Roles')
-                            li
-                                form.w3-container(action='/views',method='GET')
-                                    input.w3-btn.w3-hover-teal(type='submit',value='Views')
-                            
-                        br
+                                form.w3-container(action='/admin/logs/download',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
+                        hr
                 .w3-col.m8.l9
-                    h3 Bem-Vindo Admnistrador!           
-  
+                  h3.w3-center Bem-Vindo Admnistrador!
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey
       address iBandaApp by JG/TF copyrights reserved.
