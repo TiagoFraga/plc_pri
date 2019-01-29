@@ -66,8 +66,7 @@ router.get('/users/listar/tipo/:tipo',(req,res) =>{
 })
 
 // Rota da api para registar um utilizador na base de dados
-//Alterar a rota !!!!!!!!!
-router.post('/users/regista',(req,res) => {
+router.post('/users/registar',(req,res) => {
     User.inserir(req.body)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na inserção do Utilizador: ' + erro))

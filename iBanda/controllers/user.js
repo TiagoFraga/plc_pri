@@ -1,5 +1,5 @@
 var User = require('../models/user')
-var bcrypt = require('bcrypt-nodejs')
+var bcrypt = require('bcrypt')
 const Users = module.exports
 
 // Função para listar todos os utilizadores

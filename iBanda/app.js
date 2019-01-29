@@ -63,8 +63,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter)
 app.use('/api/admin', adminAPIRouter)
 app.use('/admin', adminRouter)
-//app.use('/produtor',produtorRouter)
-//app.use('/consumidor',consumidorRouter)
+app.use('/produtor',produtorRouter)
+app.use('/consumidor',consumidorRouter)
 app.use('/api/produtor',produtorAPIRouter)
 app.use('/api/consumidor',consumidorAPIRouter)
 

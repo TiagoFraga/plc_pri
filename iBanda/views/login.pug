@@ -6,7 +6,9 @@ block content
             h1 iBanda
     .w3-container.w3-large
         .w3-bar.w3-black.w3-mobile
-            .w3-bar-item.w3-button.w3-wide(action='/', method='GET') Inicio
+            .w3-bar-item
+                form.w3-container(action='/', method='GET')
+                    input.w3-button.w3-wide(type= 'submit', value= 'Inicio')
     .w3-container.w3-center
         .w3-card.w3-margin.w3-display-middle.w3-padding-large
             h3.w3-center Login

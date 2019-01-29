@@ -7,9 +7,15 @@ block content
   .w3-container.w3-large
     .w3-bar.w3-black.w3-mobile
       .w3-bar-item
-      form.w3-button.w3-wide(type= 'submit', action='/sobre', method='GET') Sobre
-      .w3-bar-item.w3-button.w3-wide(action='/contactos', method='GET') Contactos
-      .w3-bar-item.w3-button.w3-right.w3-wide(action='/login', method='GET') Login
+        form.w3-container(action='/sobre', method='GET')
+          input.w3-button.w3-wide(type= 'submit', value= 'Sobre') 
+      .w3-bar-item
+        form.w3-container(action='/contactos', method='GET')
+          input.w3-button.w3-wide(type= 'submit', value= 'Contactos')
+      .w3-bar-item.w3-right
+        form.w3-container(action='/login', method='GET')
+          input.w3-button.w3-wide(type= 'submit', value= 'Login')
+  br
   .w3-container
     .w3-card
       table.w3-table-all

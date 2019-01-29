@@ -15,30 +15,31 @@ block content
   .w3-container  
     .w3-card-4
         header.w3-grey.w3-center
-            h2.w3-text-white Lista de Utilizadores
+            h2.w3-text-white Lista de Eventos
         .w3-container
             .w3-row
-                .w3-col.m6.l7.w3-responsive
+                .w3-col.m6.l7
                     table.w3-table-all
                         tr
-                            th Username:
-                            th Email:
+                            th ID:
                             th Tipo:
-                        each u in users
-                            tr
-                                td= u._id
-                                td= u.email
-                                td= u.userType
+                            th Designação:
+                            th Data:
+                            th Horario:
+                            th Local:
+                            th Informação:
+                        tr
+                               
                 .w3-col.m4.l3
                     ul.w3-ul.w3-center
                         li
-                            form.w3-container(method="GET" action="/admin/users/remove")
-                                input.w3-input.w3-border(type="text" name="username" placeholder="Username")
+                            form.w3-container(method="GET" action="/admin/eventos/remove")
+                                input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Remover" id='remover')
                         li
-                            form.w3-container(method="GET" action="/admin/users/atualiza")
-                                input.w3-input.w3-border(type="text" name="username" placeholder="Username")
+                            form.w3-container(method="GET" action="/admin/eventos/atualiza")
+                                input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')
            

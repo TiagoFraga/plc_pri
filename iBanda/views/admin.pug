@@ -6,7 +6,9 @@ block content
       h1 iBanda
   .w3-container.w3-large
     .w3-bar.w3-black.w3-mobile
-      .w3-bar-item.w3-button.w3-right.w3-wide(action='/login', method='GET') Logout
+      .w3-bar-item.w3-right
+        form.w3-container(action='/logout', method='GET')
+            input.w3-button.w3-wide(type= 'submit', value= 'Logout')
   .w3-container
             .w3-row
                 .w3-col.m4.l3       
@@ -17,7 +19,7 @@ block content
                           ul.w3-ul
                             li 
                               form.w3-container(action='/admin/users/registar',method='GET')
-                                input.w3-btn.w3-hover-grey(type='submit',value='Registar')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
                             li 
                               form.w3-container(action='/admin/users/listar',method='GET')
                                 input.w3-btn.w3-hover-grey(type='submit',value='Listar')
@@ -38,7 +40,7 @@ block content
                               b Noticias
                             ul.w3-ul
                               li
-                                form.w3-container(action='/admin/noticias/adicionar',method='GET')
+                                form.w3-container(action='/admin/noticias/registar',method='GET')
                                     input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
                               li
                                 form.w3-container(action='/admin/noticias/listar',method='GET')
@@ -49,7 +51,7 @@ block content
                             b Eventos
                           ul.w3-ul
                             li
-                              form.w3-container(action='/admin/eventos/adicionar',method='GET')
+                              form.w3-container(action='/admin/eventos/registar',method='GET')
                                 input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
                             li
                               form.w3-container(action='/admin/eventos/listar',method='GET')
@@ -59,7 +61,7 @@ block content
                                 input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
                         hr
                         .w3-bar-item.w3-center 
-                          h3
+                          h2
                             b Estatistica
                           ul.w3-ul
                             li

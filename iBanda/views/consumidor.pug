@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .w3-container.w3-center.w3-jumbo
+    header.w3-container.w3-dark-grey
+      h1 iBanda
+  .w3-container.w3-large
+    .w3-bar.w3-black.w3-mobile
+      .w3-bar-item.w3-right
+        form.w3-container(action='/logout', method='GET')
+            input.w3-button.w3-wide(type= 'submit', value= 'Logout')
+  .w3-container
+            .w3-row
+                .w3-col.m4.l3       
+                    .w3-side-bar.w3-bar-block.w3-large.w3-black
+                        .w3-bar-item.w3-center
+                            h2
+                              b Obras
+                            ul.w3-ul
+                              li
+                                form.w3-container(action='/admin/obras/listar',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Listar')
+                              li
+                                form.w3-container(action='/admin/obras/exportar',method='GET')
+                                    input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
+                        hr
+                        .w3-bar-item.w3-center 
+                          h2
+                            b Eventos
+                          ul.w3-ul
+                            li
+                              form.w3-container(action='/admin/eventos/listar',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Consultar')
+                        hr
+                .w3-col.m8.l9
+                  h3.w3-center Bem-Vindo Consumidor!
+  .w3-container.w3-center.w3-bottom
+    footer.w3-container.w3-dark-grey
+      address iBandaApp by JG/TF copyrights reserved.
+
+
