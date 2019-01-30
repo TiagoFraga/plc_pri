@@ -27,9 +27,13 @@ var consumidorAPIRouter = require('./routes/api/consumidor')
 var app = express();
 
 // Base de Dados (Falta editar conexão)
+const config = {
+  autoIndex: false,
+  useNewUrlParser: true,
+};
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/iBanda', {useNewUrlParser: true})
+  .connect('mongodb://127.0.0.1:27017/iBanda',config)
   .then(() => console.log('Mongo status: ' + mongoose.connection.readyState))
   .catch(() => console.log('Mongo: erro na conexão.'))
 

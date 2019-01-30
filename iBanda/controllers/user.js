@@ -50,3 +50,14 @@ Users.remove = username =>{
     })
 } 
 
+Users.atualiza = async user =>{
+    var hash = await bcrypt.hash(user.password, 10)
+    return User.findOneAndUpdate({_id:user.username},{$set:{password:hash,name:user.nome,email:user.email}},{new: true},(erro,doc)=>{
+        if(!erro){
+        }
+        else{
+            console.log('Não consegui atualizar utilizador')
+        }
+        
+    })
+}

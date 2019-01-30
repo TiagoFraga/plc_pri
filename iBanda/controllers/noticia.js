@@ -9,6 +9,12 @@ Noticias.listar = () => {
         .exec()
 }
 
+Noticias.obter = id =>{
+    return Noticia
+           .findOne({_id:id})
+           .exec()
+}
+
 // Função para adicionar uma notícia a base de dados
 Noticias.adicionar = async n =>{
     await Noticia.count({},(erro,count) =>{

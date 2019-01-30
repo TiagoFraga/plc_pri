@@ -42,6 +42,26 @@ router.post('/users/remover',passport.authenticate('isAdmin',{session:false}),(r
     })
 })
 
+router.get('/users/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    console.log(req.query.username)
+    axios.get('http://localhost:9009/api/admin/users/atualizar/'+ req.query.username)
+         .then(dados => {
+            res.render('atualizaUser',{user: dados.data})})
+         .catch(erro => {
+                console.log('Erro ao gerar página de atualizar: ' + erro)
+                res.render('error', {error: erro, message: "Erro ao gerar página de atualizar Utilizador"})
+         })
+})
+
+router.post('/users/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/users/atualizar', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/users/listar'))
+        .catch(erro => {
+            console.log('Erro na atualização do Utilizador: ' + erro)
+            res.render('error', {error: erro, message: "Erro na atualização do Utilizador"})
+    })
+})
+
 // ******************************* Obras ***************************************
 
 router.get('/obras/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
@@ -103,8 +123,8 @@ router.post('/noticias/remover',passport.authenticate('isAdmin',{session:false})
     axios.post('http://localhost:9009/api/admin/noticias/remover', req.body)
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
-            console.log('Erro na inserção da Notícia: ' + erro)
-            res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+            console.log('Erro na remoção da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na remoção da Notícia"})
     })
 })
 
@@ -112,10 +132,31 @@ router.post('/noticias/visibilidade',passport.authenticate('isAdmin',{session:fa
     axios.post('http://localhost:9009/api/admin/noticias/visibilidade', req.body)
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
-            console.log('Erro na inserção da Notícia: ' + erro)
-            res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+            console.log('Erro na alteração da visibilidade da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na alteração da Visibilidade"})
     })
 })
+
+router.get('/noticias/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/admin/noticias/atualizar/'+ req.query.id)
+         .then(dados => {
+            res.render('atualizaNoticia',{noticias: dados.data})})
+         .catch(erro => {
+                console.log('Erro na listagem de Notícias: ' + erro)
+                res.render('error', {error: erro, message: "Erro na listagem de Notícias"})
+         })
+})
+
+router.post('/noticias/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    console.log(req.body)
+    axios.post('http://localhost:9009/api/admin/noticias/atualizar', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
+        .catch(erro => {
+            console.log('Erro na atualização da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na atualização da Notícia"})
+    })
+})
+
 
 
 // ******************************* Eventos ***************************************
@@ -155,6 +196,27 @@ router.post('/eventos/remover',passport.authenticate('isAdmin',{session:false}),
             res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
     })
 })
+
+router.get('/eventos/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/admin/eventos/atualizar/'+ req.query.id)
+         .then(dados => {
+            console.log(dados.data)
+            res.render('atualizaEvento',{evento: dados.data})})
+         .catch(erro => {
+                console.log('Erro ao gerar página de Atualização do Evento: ' + erro)
+                res.render('error', {error: erro, message: "Erro ao gerar página de Atualização do Evento"})
+         })
+})
+
+router.post('/eventos/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/eventos/atualizar', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
+        .catch(erro => {
+            console.log('Erro na atualização do Evento: ' + erro)
+            res.render('error', {error: erro, message: "Erro na atualização do Evento"})
+    })
+})
+
 
 
 module.exports = router;

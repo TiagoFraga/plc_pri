@@ -81,8 +81,14 @@ router.post('/users/remover',(req,res) =>{
         .catch(erro => res.status(500).send('Erro na remoção do Utilizador: ' + erro))
 })
 
+router.get('/users/atualizar/:username',(req,res)=>{
+    User.consultar(req.params.username)
+           .then(dados => res.jsonp(dados))
+           .catch(erro => res.status(500).send('Erro na obtenção da Notícia: ' + erro))
+})
+
 // Rota da api para atualizar um utilizador na base de dados
-router.post('/users/atualiza',(req,res)=>{
+router.post('/users/atualizar',(req,res)=>{
     User.atualiza(req.body)
       .then(dados => res.jsonp(dados))
       .catch(erro => res.status(500).send('Erro na atualização da Obra: ' + erro))
@@ -93,7 +99,7 @@ router.post('/users/atualiza',(req,res)=>{
 // Rota da api para  Listar todas as notícias 
 router.get('/noticias/listar',(req,res) =>{
     Noticia.listar()
-           .then(dados =>{console.log(dados) 
+           .then(dados =>{ 
                           res.jsonp(dados)} )
            .catch(erro => res.status(500).send('Erro na Listagem de Notícias: ' + erro))
 })
@@ -105,8 +111,14 @@ router.post('/noticias/registar',(req,res) =>{
            .catch(erro => res.status(500).send('Erro na inserção da Notícia: ' + erro))
 })
 
+router.get('/noticias/atualizar/:id',(req,res)=>{
+    Noticia.obter(req.params.id)
+           .then(dados => res.jsonp(dados))
+           .catch(erro => res.status(500).send('Erro na obtenção da Notícia: ' + erro))
+})
+
 // Rota da api para Atualizar uma dada notícia na base de dados
-router.post('/noticias/atualiza',(req,res) =>{
+router.post('/noticias/atualizar',(req,res) =>{
     Noticia.atualiza(req.body)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na atualização da Notícia: ' + erro))
@@ -169,6 +181,12 @@ router.post('/eventos/registar',(req,res) => {
     Evento.inserir(req.body)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
+})
+
+router.get('/eventos/atualizar/:id',(req,res)=>{
+    Evento.consultar(req.params.id)
+           .then(dados => res.jsonp(dados))
+           .catch(erro => res.status(500).send('Erro na obtenção da Notícia: ' + erro))
 })
 
 // Atualiza um evento, dado um evento completo

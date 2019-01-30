@@ -22,11 +22,13 @@ block content
                     table.w3-table-all
                         tr
                             th Username:
+                            th Nome:
                             th Email:
                             th Tipo:
                         each u in users
                             tr
                                 td= u._id
+                                td= u.name
                                 td= u.email
                                 td= u.userType
                 .w3-col.m4.l3
@@ -37,7 +39,7 @@ block content
                                 br
                                 input.w3-btn.w3-black(type= "submit" value= "Remover" id= 'remover')
                         li
-                            form.w3-container(method="GET" action="/admin/users/atualiza")
+                            form.w3-container(method="GET" action="/admin/users/atualizar")
                                 input.w3-input.w3-border(type="text" name="username" placeholder="Username")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')

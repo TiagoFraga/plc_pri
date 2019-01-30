@@ -76,15 +76,13 @@ Eventos.remover = eid => {
 }
 
 //Atualiza um evento, dado um evento completo
-Eventos.atualizar = evento =>{
-    Evento.findByIdAndUpdate(evento._id,evento,{new: true},(erro,doc)=>{
+Eventos.atualizar = e =>{
+    return Evento.findOneAndUpdate({_id:e.id},{$set:{data:e.data,horario:{hinicio: e.hinicio, hfim: e.hfim},tipo: e.tipo,designacao: e.designacao,local: e.local,informacao: e.informacao}},{new: true},(erro,doc)=>{
         if(!erro){
-            console.log('Evento atualizado com sucesso!')
         }
         else{
-            console.log('Erro: Evento não atualizado!')
+            console.log('Não consegui atualizar evento')
         }
-        return doc 
     })
 }
 
