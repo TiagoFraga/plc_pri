@@ -28,8 +28,16 @@ block content
                             th Horario:
                             th Local:
                             th Informação:
-                        tr
-                               
+                        each e in eventos
+                            tr
+                                - var horario = "Inicio: " + e.horario.hinicio + " - Fim: " + e.horario.hfim;  
+                                td= e._id
+                                td= e.tipo
+                                td= e.designacao
+                                td= e.data
+                                td= horario
+                                td= e.local
+                                td= e.informacao
                 .w3-col.m4.l3
                     ul.w3-ul.w3-center
                         li

@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 var User = require('../../controllers/user')
 var Obra = require('../../controllers/obra')
+var Noticia = require('../../controllers/noticia')
+var Evento = require('../../controllers/evento')
 
 
 //**************************** Obras **********************************************
@@ -89,35 +91,36 @@ router.post('/users/atualiza',(req,res)=>{
 //**************************** Noticias **********************************************
 
 // Rota da api para  Listar todas as notícias 
-router.get('/noticia/listar',(req,res) =>{
+router.get('/noticias/listar',(req,res) =>{
     Noticia.listar()
-           .then(dados => res.jsonp(dados))
+           .then(dados =>{console.log(dados) 
+                          res.jsonp(dados)} )
            .catch(erro => res.status(500).send('Erro na Listagem de Notícias: ' + erro))
 })
 
 // Rota da api para Adicionar nova notícia na base de dados
-router.post('/noticia/adiciona',(req,res) =>{
-    Noticia.adiciona(req.body)
+router.post('/noticias/registar',(req,res) =>{
+    Noticia.adicionar(req.body)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na inserção da Notícia: ' + erro))
 })
 
 // Rota da api para Atualizar uma dada notícia na base de dados
-router.post('/noticia/atualiza',(req,res) =>{
+router.post('/noticias/atualiza',(req,res) =>{
     Noticia.atualiza(req.body)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na atualização da Notícia: ' + erro))
 })
 
 // Rota da api para Remover uma dada notícia da base de dados
-router.get('/noticia/remove/:id',(req,res) =>{
+router.get('/noticias/remove/:id',(req,res) =>{
     Noticia.remove(req.params.id)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na remoção da Notícia: ' + erro))
 })
 
 // Rota da api para Alterar a visibilidade de uma  dada notícia na base de dados
-router.get('/noticia/visibilidade/:id',(req,res) =>{
+router.get('/noticias/visibilidade/:id',(req,res) =>{
     Noticia.alteraVisibilidade(req.params.id)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na alteração de visibilidade da Notícia: ' + erro))

@@ -10,7 +10,7 @@ Noticias.listar = () => {
 }
 
 // Função para adicionar uma notícia a base de dados
-Noticias.adiciona = async n =>{
+Noticias.adicionar = async n =>{
     await Noticia.count({},(erro,count) =>{
         if(!erro){
             var id = count +1
@@ -18,6 +18,7 @@ Noticias.adiciona = async n =>{
                 _id: id,
                 titulo: n.titulo,
                 corpo: n.corpo,
+                data: n.data,
                 visibilidade: true,
             })
 
@@ -31,15 +32,7 @@ Noticias.adiciona = async n =>{
 
 // Função para atualizar uma notícia
 Noticias.atualiza = n =>{
-    
-    var noticia = new Noticia({
-        _id: n.id,
-        titulo: n.titulo,
-        corpo: n.corpo,
-        visibilidade: true,
-    })
-    
-    return Noticia.findByIdAndUpdate(n.id,noticia,{new: true},(erro,doc)=>{
+    return Noticia.findOneAndUpdate({_id:n.id},{$set:{titulo:n.titulo,corpo: n.corpo,visibilidade:true}},{new: true},(erro,doc)=>{
         if(!erro){
         }
         else{
@@ -65,29 +58,26 @@ Noticias.remove = id =>{
 Noticias.alteraVisibilidade = async id =>{
     var not = await Noticia.findOne({_id: id})
     if(not.visibilidade){
-        var noticia = new Noticia({
-            _id: not._id,
-            titulo: not.titulo,
-            corpo: not.corpo,
-            visibilidade: false,
+        return Noticia.findOneAndUpdate({_id:id},{$set:{visibilidade:false}},{new: true},(erro,doc)=>{
+            if(!erro){
+            }
+            else{
+                console.log('Não consegui atualizar visibilidade da notícia')
+            }
         })
     }
     else{
-        var noticia = new Noticia({
-            _id: not._id,
-            titulo: not.titulo,
-            corpo: not.corpo,
-            visibilidade: true,
+        return Noticia.findOneAndUpdate({_id:id},{$set:{visibilidade:true}},{new: true},(erro,doc)=>{
+            if(!erro){
+            }
+            else{
+                console.log('Não consegui atualizar visibilidade da notícia')
+            }
         })
     }
 
-    return Noticia.findByIdAndUpdate(noticia._id,noticia,{new: true},(erro,doc)=>{
-        if(!erro){
-        }
-        else{
-            console.log('Não consegui atualizar utilizador')
-        }
+   
         
-    })
+    
 
 }

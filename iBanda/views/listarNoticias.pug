@@ -20,16 +20,21 @@ block content
             .w3-row
                 .w3-col.m6.l7.w3-responsive
                     ul.w3-ul.w3-border
-                        li
-                            h5
-                                b ID:
-                            h4
-                                b tÍtulo
-                            h6 data
-                            p content
-                        li
-                            h5
-                                b ID:
+                        each n in noticias
+                            li
+                                h5
+                                    b= n._id
+                                h4
+                                    b= n.titulo 
+                                h6= n.data 
+                                p= n.corpo
+                                if n.visibilidade
+                                    p
+                                        b Estado - Visivel
+                                else
+                                    p
+                                        b Estado - Não Visivel
+                    br
                 .w3-col.m4.l3
                     ul.w3-ul.w3-center
                         li
@@ -42,7 +47,7 @@ block content
                                 input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')
-           
+                        
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey
       address iBandaApp by JG/TF copyrights reserved.

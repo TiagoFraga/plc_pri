@@ -17,12 +17,12 @@ block content
         header.w3-grey.w3-center
             h2.w3-text-white Registar Noticia
         .w3-container
-            form.w3-container(method="POST" action="/admin/adiciona")
+            form.w3-container(method="POST" action="/admin/noticias/registar")
                 input.w3-input(type="text" name="titulo" placeholder="Titulo:")
                 br
                 input.w3-input(type="text" name="corpo" placeholder="Corpo:")
                 br
-                input.w3-input(type="email" name="data" placeholder="Data:")
+                input.w3-input(type="date" name="data" placeholder="Data:")
                 br
                 label.w3-label(id='message') 
                 br
