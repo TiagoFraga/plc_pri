@@ -45,6 +45,7 @@ Eventos.inserir = async e =>{
     await Evento.count({},(erro,count) =>{
         if(!erro){
             var id = count +1
+            console.log("ID: " + id)
             var evento = new Evento({
                 _id: id,
                 data: e.data,

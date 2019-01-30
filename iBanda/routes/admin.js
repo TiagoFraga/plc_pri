@@ -2,6 +2,9 @@ var express = require('express')
 var router = express.Router()
 var axios = require('axios')
 var passport = require('passport')
+var formidable = require('formidable')
+var jsonfile = require('jsonfile')
+var fs = require('fs')
 
 
 
@@ -166,6 +169,9 @@ router.get('/eventos/registar',passport.authenticate('isAdmin',{session:false}),
     res.render('registarEvento')
 })
 
+router.get('/eventos/inserir',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    res.render('inserirEvento')
+})
 
 router.get('/eventos/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     axios.get('http://localhost:9009/api/admin/eventos/listar')
@@ -179,12 +185,41 @@ router.get('/eventos/listar',passport.authenticate('isAdmin',{session:false}),(r
 })
 
 router.post('/eventos/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    console.log(req.body)
     axios.post('http://localhost:9009/api/admin/eventos/registar', req.body)
         .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
         .catch(erro => {
             console.log('Erro na inserção do Evento: ' + erro)
             res.render('error', {error: erro, message: "Erro na inserção do Evento"})
+    })
+})
+
+router.post('/eventos/inserir',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    var form = new formidable.IncomingForm()
+    form.parse(req,(erro,fields,files)=>{
+        if(!erro){
+            var fenviado = files.ficheiro.path
+            var fnovo = './public/uploadedGramatica/'+files.ficheiro.name
+            fs.rename(fenviado,fnovo,(erro)=>{
+            if(!erro){
+                    jsonfile.readFile(fnovo,(erro, eventos)=>{
+                        if(!erro){
+                            axios.post('http://localhost:9009/api/admin/eventos/inserir', eventos)
+                            .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
+                            .catch(erro => {
+                                console.log('Erro na inserção do Evento: ' + erro)
+                                res.render('error', {error: erro, message: "Erro na inserção do Evento"})
+                            })
+                        }else{
+                        console.log("Nao consegui ler o ficheiro ")
+                        }
+                    })
+                }else{
+                    console.log("Nao consegui renomear o ficheiro ")
+                }
+            })
+        }else{
+            console.log("Nao consegui fazer o parse do ficheiro ")
+        }
     })
 })
 

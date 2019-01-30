@@ -3,10 +3,13 @@ var router = express.Router()
 var axios = require('axios')
 var passport = require('passport')
 var jwt = require('jsonwebtoken')
+var Noticia = require('../controllers/noticia')
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  res.render('index')
+  Noticia.listarVisiveis()
+         .then(dados => res.render('index',{noticias:dados}))
+         .catch(erro => res.status(500).send('Erro na Listagem de Notícias: ' + erro))
 })
 
 router.get('/sobre', (req, res) => {
@@ -60,5 +63,7 @@ router.get('/logout',(req,res) => {
   req.logout()
   res.redirect('/')
 })
+
+
 
 module.exports = router;

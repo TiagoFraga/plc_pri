@@ -182,21 +182,28 @@ agenda returns[int totalEventos,HashMap<Integer,Evento> listaEventos]
                                System.out.println("\n");
                                System.out.println("******************** Base de Dados ***********************");
                                try{
-                                  FileWriter fileWriter = new FileWriter("/home/gomes/Universidade/PLC/Local/Processamento e Representação de Informação/Trabalho Prático/Gramatica/teste.json");
+                                  FileWriter fileWriter = new FileWriter("/Users/tiagofraga/Desktop/PLC/PRI/Trabalhos/Local/TP/Gramatica/teste.json");
                                   String json;
                                   int count = 1;
                                   for(Integer i : $agenda.listaEventos.keySet()){
-                                    if(count == $agenda.listaEventos.size()){
+                                    if(count == 1){
+                                         json = "[{\"data \": \""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
+                                           $agenda.listaEventos.get(i).getHorario().getHinicio().replaceAll("'","").replaceAll("_"," ")+ "\",\"hfim\":\"" + $agenda.listaEventos.get(i).getHorario().getHfim().replaceAll("'","").replaceAll("_"," ") +
+                                            "\"},\"tipo\":\"" + $agenda.listaEventos.get(i).getTipo().replaceAll("'","").replaceAll("_"," ") + "\",\"designacao\":\"" + $agenda.listaEventos.get(i).getDesignacao().replaceAll("'","").replaceAll("_"," ")+ 
+                                            "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ") + "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ")+ "\"},\n";
+                                    
+                                    } 
+                                    else if(count == $agenda.listaEventos.size()){
                                       json = "{\"data\":\""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
                                            $agenda.listaEventos.get(i).getHorario().getHinicio().replaceAll("'","").replaceAll("_"," ") + "\",\"hfim\":\"" + $agenda.listaEventos.get(i).getHorario().getHfim().replaceAll("'","").replaceAll("_"," ") +
                                             "\"},\"tipo\":\"" + $agenda.listaEventos.get(i).getTipo().replaceAll("'","").replaceAll("_"," ") + "\",\"designacao\":\"" + $agenda.listaEventos.get(i).getDesignacao().replaceAll("'","").replaceAll("_"," ") + 
-                                            "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ")+ "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ") + "\"}"; 
+                                            "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ")+ "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ") + "\"}]"; 
                                     }    
                                     else{
                                         json = "{\"data \": \""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
                                            $agenda.listaEventos.get(i).getHorario().getHinicio().replaceAll("'","").replaceAll("_"," ")+ "\",\"hfim\":\"" + $agenda.listaEventos.get(i).getHorario().getHfim().replaceAll("'","").replaceAll("_"," ") +
                                             "\"},\"tipo\":\"" + $agenda.listaEventos.get(i).getTipo().replaceAll("'","").replaceAll("_"," ") + "\",\"designacao\":\"" + $agenda.listaEventos.get(i).getDesignacao().replaceAll("'","").replaceAll("_"," ")+ 
-                                            "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ") + "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ")+ "\"}\n"; 
+                                            "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ") + "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ")+ "\"},\n"; 
                                     }
                                     count++;
                                     fileWriter.write(json);

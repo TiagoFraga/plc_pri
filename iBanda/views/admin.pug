@@ -52,7 +52,10 @@ block content
                           ul.w3-ul
                             li
                               form.w3-container(action='/admin/eventos/registar',method='GET')
-                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir Manualmente')
+                            li
+                              form.w3-container(action='/admin/eventos/inserir',method='GET')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir Ficheiro')
                             li
                               form.w3-container(action='/admin/eventos/listar',method='GET')
                                 input.w3-btn.w3-hover-grey(type='submit',value='Listar')

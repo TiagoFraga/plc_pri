@@ -81,8 +81,12 @@ Noticias.alteraVisibilidade = async id =>{
         })
     }
 
-   
-        
-    
-
 }
+
+Noticias.listarVisiveis = () =>{
+    return Noticia
+        .find({visibilidade: true})
+        .sort({data: -1})
+        .exec()
+}
+

@@ -1,5 +1,5 @@
 extends layout
-
+ 
 block content
   .w3-container.w3-center.w3-jumbo
     header.w3-container.w3-dark-grey
@@ -8,7 +8,7 @@ block content
     .w3-bar.w3-black.w3-mobile
       .w3-bar-item
         form.w3-container(action='/sobre', method='GET')
-          input.w3-button.w3-wide(type= 'submit', value= 'Sobre') 
+          input.w3-button.w3-wide(type= 'submit', value= 'Sobre')
       .w3-bar-item
         form.w3-container(action='/contactos', method='GET')
           input.w3-button.w3-wide(type= 'submit', value= 'Contactos')
@@ -18,33 +18,18 @@ block content
   br
   .w3-container
     .w3-card
-      table.w3-table-all
-        th.w3-pale-yellow 
-          h2.w3-center 
-            b Novidades
-        tr
-          td
-            table.w3-table-all
-              tr
-                td
-                  ul.w3-ul
-                    li
-                      h4 
-                        b titulo
-                      h6 data
-                      p content
-            table.w3-table-all
-              tr
-                td
-                  ul.w3-ul
-                    li
-                      h4 
-                        b titulo
-                      h6 data
-                      p content
-
+      header.w3-container.w3-pale-yellow
+        h2.w3-center
+          b Novidades
+      .w3-container
+        ul.w3-ul.w3-border
+          each n in noticias
+            li
+              h4
+                b= n.titulo  
+              p= n.corpo
+              h6= n.data
+        br
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey
       address iBandaApp by JG/TF copyrights reserved.
-
-

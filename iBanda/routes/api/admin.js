@@ -183,6 +183,15 @@ router.post('/eventos/registar',(req,res) => {
         .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
 })
 
+router.post('/eventos/inserir',async (req,res) => {
+    for(var i in req.body){
+        console.log("API : " + JSON.stringify(req.body[i]))
+        await Evento.inserir(req.body[i])
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
+    }
+})
+
 router.get('/eventos/atualizar/:id',(req,res)=>{
     Evento.consultar(req.params.id)
            .then(dados => res.jsonp(dados))
