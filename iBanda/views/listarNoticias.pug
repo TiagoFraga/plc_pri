@@ -38,16 +38,20 @@ block content
                 .w3-col.m4.l3
                     ul.w3-ul.w3-center
                         li
-                            form.w3-container(method="GET" action="/admin/noticias/remove")
+                            form.w3-container(method="POST" action="/admin/noticias/remover")
                                 input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Remover" id='remover')
                         li
-                            form.w3-container(method="GET" action="/admin/noticias/atualiza")
+                            form.w3-container(method="GET" action="/admin/noticias/atualizar")
                                 input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')
-                        
+                        li
+                            form.w3-container(method="POST" action="/admin/noticias/visibilidade")
+                                input.w3-input.w3-border(type="text" name="id" placeholder="ID")
+                                br
+                                input.w3-btn.w3-black(type="submit" value="Visivel/Invisivel" id='Visibilidade')
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey
       address iBandaApp by JG/TF copyrights reserved.

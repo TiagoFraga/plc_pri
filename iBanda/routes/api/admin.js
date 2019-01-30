@@ -30,8 +30,8 @@ router.get('/obras/listar/tipo/:tipo',(req,res) =>{
 })
 
 // Rota da api para remover uma obra da base de dados
-router.get('/obras/remove/:obra',(req,res) =>{
-    Obra.remove(req.params.obra)
+router.post('/obras/remover',(req,res) =>{
+    Obra.remove(req.body.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na remoção da Obra: ' + erro))
 })
@@ -75,8 +75,8 @@ router.post('/users/registar',(req,res) => {
 })
 
 // Rota da api para remover um utilizador da base de dados
-router.get('/users/remove/:user',(req,res) =>{
-    User.remove(req.params.user)
+router.post('/users/remover',(req,res) =>{
+    User.remove(req.body.username)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na remoção do Utilizador: ' + erro))
 })
@@ -113,15 +113,15 @@ router.post('/noticias/atualiza',(req,res) =>{
 })
 
 // Rota da api para Remover uma dada notícia da base de dados
-router.get('/noticias/remove/:id',(req,res) =>{
-    Noticia.remove(req.params.id)
+router.post('/noticias/remover',(req,res) =>{
+    Noticia.remove(req.body.id)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na remoção da Notícia: ' + erro))
 })
 
 // Rota da api para Alterar a visibilidade de uma  dada notícia na base de dados
-router.get('/noticias/visibilidade/:id',(req,res) =>{
-    Noticia.alteraVisibilidade(req.params.id)
+router.post('/noticias/visibilidade',(req,res) =>{
+    Noticia.alteraVisibilidade(req.body.id)
            .then(dados => res.jsonp(dados))
            .catch(erro => res.status(500).send('Erro na alteração de visibilidade da Notícia: ' + erro))
 })
@@ -165,7 +165,7 @@ router.get('/eventos/listar/consultar/:id',(req,res) =>{
 })
 
 // Insere um novo evento
-router.post('/eventos/inserir',(req,res) => {
+router.post('/eventos/registar',(req,res) => {
     Evento.inserir(req.body)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
@@ -174,6 +174,13 @@ router.post('/eventos/inserir',(req,res) => {
 // Atualiza um evento, dado um evento completo
 router.post('/eventos/atualizar',(req,res) => {
     Evento.atualizar(req.body)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro: Erro na atualização do Evento: ' + erro))
+})
+
+// Apaga um evento, dado o id de um evento
+router.post('/eventos/remover',(req,res) => {
+    Evento.remover(req.body.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro: Erro na atualização do Evento: ' + erro))
 })

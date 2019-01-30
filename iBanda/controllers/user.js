@@ -39,14 +39,14 @@ Users.inserir = async u => {
 
 // Função para remover um dado utilizador 
 Users.remove = username =>{
-    User.findByIdAndRemove(username,(erro,doc) =>{
+    return User.findOneAndRemove({_id: username},(erro,doc) =>{
         if(!erro){
             console.log('Utilizador removido com sucesso')
         }
         else{
             console.log('Não consegui remover utilizador')
         }
-        return doc
+        
     })
 } 
 

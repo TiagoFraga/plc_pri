@@ -12,6 +12,7 @@ var HorarioSchema = new Schema(
 )
 
 var EventoSchema = new Schema({
+    _id:{type: Number, required: true},
     data: {type: String, required: true},
     horario: {type: HorarioSchema},
     tipo: {type: String, required: true},

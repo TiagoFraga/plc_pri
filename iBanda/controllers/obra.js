@@ -128,13 +128,12 @@ Obras.atualiza = o =>{
 
 // Função para remover uma dada obra (Falta Testar)
 Obras.remove = id =>{
-    Obra.findByIdAndRemove(id,(erro,doc) =>{
+    return Obra.findOneAndRemove({_id: id},(erro,doc) =>{
         if(!erro){
             console.log('Utilizador removido com sucesso')
         }
         else{
             console.log('Não consegui remover utilizador')
         }
-        return doc
     })
 }

@@ -10,6 +10,8 @@ router.get('/',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     res.render('admin')
 })
 
+// ******************************* Utilizadores ***************************************
+
 router.get('/users/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     res.render('registarUser')
 })
@@ -32,6 +34,16 @@ router.post('/users/registar',passport.authenticate('isAdmin',{session:false}),(
     })
 })
 
+router.post('/users/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/users/remover', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/users/listar'))
+        .catch(erro => {
+            res.render('error', {error: erro, message: "Erro na remoção de Utilizador"})
+    })
+})
+
+// ******************************* Obras ***************************************
+
 router.get('/obras/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     axios.get('http://localhost:9009/api/admin/obras/listar')
         .then(dados => {res.render('listarObras',{obras: dados.data})})
@@ -49,6 +61,18 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isAdmin',{session:f
             res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
     })
 })
+
+router.post('/obras/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/obras/remover', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/obras/listar'))
+        .catch(erro => {
+            console.log('Erro na inserção da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+    })
+})
+
+
+// ******************************* Noticias ***************************************
 
 
 router.get('/noticias/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
@@ -75,16 +99,36 @@ router.get('/noticias/listar',passport.authenticate('isAdmin',{session:false}),(
          })
 })
 
+router.post('/noticias/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/noticias/remover', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
+        .catch(erro => {
+            console.log('Erro na inserção da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+    })
+})
+
+router.post('/noticias/visibilidade',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/noticias/visibilidade', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
+        .catch(erro => {
+            console.log('Erro na inserção da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+    })
+})
+
+
+// ******************************* Eventos ***************************************
+
+
 router.get('/eventos/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     res.render('registarEvento')
 })
 
 
-
 router.get('/eventos/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     axios.get('http://localhost:9009/api/admin/eventos/listar')
          .then(dados => {
-            console.log(dados.data) 
             res.render('listarEventos',{eventos: dados.data})})
          .catch(erro => {
                 console.log('Erro na listagem de Eventos: ' + erro)
@@ -93,6 +137,24 @@ router.get('/eventos/listar',passport.authenticate('isAdmin',{session:false}),(r
     
 })
 
+router.post('/eventos/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    console.log(req.body)
+    axios.post('http://localhost:9009/api/admin/eventos/registar', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
+        .catch(erro => {
+            console.log('Erro na inserção do Evento: ' + erro)
+            res.render('error', {error: erro, message: "Erro na inserção do Evento"})
+    })
+})
+
+router.post('/eventos/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.post('http://localhost:9009/api/admin/eventos/remover', req.body)
+        .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
+        .catch(erro => {
+            console.log('Erro na inserção da Notícia: ' + erro)
+            res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+    })
+})
 
 
 module.exports = router;

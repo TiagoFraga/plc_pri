@@ -17,20 +17,20 @@ block content
         header.w3-grey.w3-center
             h2.w3-text-white Registar Evento
         .w3-container
-            form.w3-container(method="POST" action="/admin/adiciona")
-                input.w3-input(type="text" name="data" placeholder="Data:")
+            form.w3-container(method="POST" action="/admin/eventos/registar")
+                input.w3-input(type="date" name="data" placeholder="Data:")
                 br
                 input.w3-input(type="text" name="hinicio" placeholder="Hora de Inicio:")
                 br
-                input.w3-input(type="email" name="hfim" placeholder="Hora de Fim:")
+                input.w3-input(type="text" name="hfim" placeholder="Hora de Fim:")
                 br
-                input.w3-input(type="email" name="tipo" placeholder="Tipo:")
+                input.w3-input(type="text" name="tipo" placeholder="Tipo:")
                 br
-                input.w3-input(type="email" name="designacao" placeholder="Designação:")
+                input.w3-input(type="text" name="designacao" placeholder="Designação:")
                 br
-                input.w3-input(type="email" name="local" placeholder="Local:")
+                input.w3-input(type="text" name="local" placeholder="Local:")
                 br
-                input.w3-input(type="email" name="informacao" placeholder="Informação:")
+                input.w3-input(type="text" name="informacao" placeholder="Informação:")
                 br
                 label.w3-label(id='message') 
                 br

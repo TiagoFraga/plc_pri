@@ -36,7 +36,7 @@ block content
                 .w3-col.m4.l3
                     ul.w3-ul.w3-center
                         li
-                            form.w3-container(method="GET" action="/admin/obras/remove")
+                            form.w3-container(method="POST" action="/admin/obras/remover")
                                 input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Remover" id='remover')

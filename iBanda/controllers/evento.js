@@ -5,7 +5,7 @@ const Eventos = module.exports
 Eventos.listar = () =>{
     return Evento
         .find()
-        .sort({data: -1})
+        .sort({data: 1})
         .exec()
 }
 
@@ -41,20 +41,37 @@ Eventos.consultar = eid =>{
 }
 
 //Insere um novo evento
-Eventos.inserir = evento =>{
-    return Evento.create(evento)
+Eventos.inserir = async e =>{
+    await Evento.count({},(erro,count) =>{
+        if(!erro){
+            var id = count +1
+            var evento = new Evento({
+                _id: id,
+                data: e.data,
+                horario: { hinicio: e.hinicio, hfim: e.hfim},
+                tipo: e.tipo,
+                designacao: e.designacao,
+                local: e.local,
+                informacao: e.informacao
+            })
+
+            return Evento.create(evento)
+        }
+        else{
+            console.log('Erro: ' + erro )
+        }
+    })
 }
 
 //Remove um evento, dado o seu id
 Eventos.remover = eid => {
-    Evento.findByIdAndRemove(eid,(erro,doc) =>{
+   return Evento.findOneAndRemove({_id: eid},(erro,doc) =>{
         if(!erro){
             console.log('Evento removido com sucesso!')
         }
         else{
             console.log('Erro: Evento não removido!')
         }
-        return doc
     })
 }
 

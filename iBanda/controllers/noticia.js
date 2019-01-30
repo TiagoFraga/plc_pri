@@ -43,14 +43,13 @@ Noticias.atualiza = n =>{
 }
 
 Noticias.remove = id =>{
-    return Noticia.findByIdAndRemove(id,(erro,doc) =>{
+    return Noticia.findOneAndRemove({_id: id},(erro,doc) =>{
         if(!erro){
             console.log('Utilizador removido com sucesso')
         }
         else{
             console.log('Não consegui remover utilizador')
         }
-        
     })
 }
 
