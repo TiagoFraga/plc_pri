@@ -1,0 +1,89 @@
+extends layout
+ 
+block content
+  .w3-container.w3-jumbo
+    header.w3-container.w3-dark-grey
+      h1 iBanda
+  .w3-container.w3-large
+    .w3-bar.w3-black.w3-mobile
+        .w3-bar-item
+            form.w3-container(action='/admin', method='GET')
+                input.w3-button.w3-wide(type= 'submit', value= 'Inicio')
+        .w3-bar-item
+            form.w3-container(action='/admin/obras/listar', method='GET')
+                input.w3-button.w3-wide(type= 'submit', value= 'Lista de Obras')  
+        .w3-bar-item.w3-right
+            form.w3-container(action='/logout', method='GET')
+                input.w3-button.w3-wide(type= 'submit', value= 'Logout')
+  .w3-container  
+    .w3-card-4
+        header.w3-grey.w3-center
+            -var titulo = "Obra: " + obra._id; 
+            h2.w3-text-white= titulo
+        .w3-container
+            .w3-row
+                .w3-col.m6.l7.w3-responsive
+                    ul.w3-ul
+                        li
+                            p
+                                b ID:
+                            p= obra._id
+                        li
+                            p
+                                b Titulo:
+                            p= obra.titulo
+                        li
+                            p
+                                b Tipo:
+                            p= obra.tipo
+                        li
+                            p
+                                b Compositor:
+                            p= obra.compositor
+                        if obra.arranjo
+                            li
+                                p
+                                    b Arranjo
+                                p= obra.arranjo
+                        if obra.instrumentos
+                            p.w3-center
+                                b Instrumentos :
+                                each o in obra.instrumentos
+                                    li
+                                        p
+                                            b Partitura:
+                                        p
+                                            b Nome:
+                                        p= o.nome
+                                        p
+                                            b Path:
+                                        p= o.partitura.path
+                                        if o.partitura.voz
+                                            p
+                                                b Voz:
+                                            p= o.partitura.voz
+                                        if o.partitura.clave
+                                            p
+                                                b Clave:
+                                            p= o.partitura.clave
+                                        if o.partitura.afinacao
+                                            p
+                                                b Afinacao:
+                                            p= o.partitura.afinacao 
+                                    br
+                .w3-col.m4.l3
+                    ul.w3-ul
+                        li
+                            form.w3-container(method="GET" action="/admin/obras/remove")
+                                input.w3-input.w3-border(type="text" name="id" placeholder="ID")
+                                br
+                                input.w3-btn.w3-black(type="submit" value="Remover" id='remover')
+                        li
+                            form.w3-container(method="GET" action="/admin/eventos/atualiza")
+                                input.w3-input.w3-border(type="text" name="id" placeholder="ID")
+                                br
+                                input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')
+           
+  .w3-container.w3-bottom
+    footer.w3-container.w3-dark-grey
+      address iBandaApp by JG/TF copyrights reserved.
