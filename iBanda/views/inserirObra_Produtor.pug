@@ -1,0 +1,30 @@
+extends layout
+ 
+block content
+  .w3-container.w3-center.w3-jumbo
+    header.w3-container.w3-dark-grey
+      h1 iBanda
+  .w3-container.w3-large
+    .w3-bar.w3-black.w3-mobile
+        .w3-bar-item
+            form.w3-container(action='/produtor', method='GET')
+                input.w3-button.w3-wide(type= 'submit', value= 'Inicio') 
+        .w3-bar-item.w3-right
+            form.w3-container(action='/logout', method='GET')
+                input.w3-button.w3-wide(type= 'submit', value= 'Logout')
+  .w3-container  
+    .w3-card-4
+        header.w3-grey.w3-center
+            h2.w3-text-white Inserir Obra
+        .w3-container
+            form.w3-container(action='/produtor/obras/inserir',method='POST', enctype='multipart/form-data')
+                label.w3-text-black
+                    b Ficheiro
+                br
+                input.w3-input.w3-border.w3-light-grey(type='file',name='ficheiro')
+                br
+                input.w3-btn.w3-black(type='submit', value='Enviar')
+            br
+  .w3-container.w3-center.w3-bottom
+    footer.w3-container.w3-dark-grey
+      address iBandaApp by JG/TF copyrights reserved.

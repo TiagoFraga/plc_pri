@@ -27,6 +27,8 @@ var consumidorAPIRouter = require('./routes/api/consumidor')
 var app = express();
 
 // Base de Dados (Falta editar conexão)
+
+// Base de Dados (Falta editar conexão)
 const config = {
   autoIndex: false,
   useNewUrlParser: true,
@@ -67,10 +69,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter)
 app.use('/api/admin', adminAPIRouter)
 app.use('/admin', adminRouter)
-app.use('/produtor',produtorRouter)
-app.use('/consumidor',consumidorRouter)
 app.use('/api/produtor',produtorAPIRouter)
+app.use('/produtor',produtorRouter)
 app.use('/api/consumidor',consumidorAPIRouter)
+app.use('/consumidor',consumidorRouter)
+
+
 
 
 // catch 404 and forward to error handler

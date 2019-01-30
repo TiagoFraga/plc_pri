@@ -38,7 +38,7 @@ Noticias.adicionar = async n =>{
 
 // Função para atualizar uma notícia
 Noticias.atualiza = n =>{
-    return Noticia.findOneAndUpdate({_id:n.id},{$set:{titulo:n.titulo,corpo: n.corpo,visibilidade:true}},{new: true},(erro,doc)=>{
+    return Noticia.findOneAndUpdate({_id:n.id},{$set:{titulo:n.titulo,corpo: n.corpo, data: n.data,visibilidade:true}},{new: true},(erro,doc)=>{
         if(!erro){
         }
         else{
