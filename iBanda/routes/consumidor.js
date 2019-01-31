@@ -17,7 +17,7 @@ router.get('/',passport.authenticate('isConsumidor',{session:false}),(req, res) 
 // ******************************* Obras ***************************************
 
 router.get('/obras/listar',passport.authenticate('isConsumidor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/consumidor/obras/listar')
+    axios.get('http://localhost:9009/api/consumidor/obras/listar',{ headers: {"Authorization" : req.session.token}})
         .then(dados => {
             atualizaVisualizacoes()
             res.render('listarObras_Consumidor',{obras: dados.data})
@@ -29,7 +29,7 @@ router.get('/obras/listar',passport.authenticate('isConsumidor',{session:false})
 })
 
 router.get('/obras/listar/obra/:obra',passport.authenticate('isConsumidor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/consumidor/obras/listar/obra/' + req.params.obra)
+    axios.get('http://localhost:9009/api/consumidor/obras/listar/obra/' + req.params.obra,{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObra_Consumidor',{obra: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -38,7 +38,7 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isConsumidor',{sess
 })
 
 router.get('/obras/listar/tipo',passport.authenticate('isConsumidor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/consumidor/obras/listar/tipo/' + req.query.tipo)
+    axios.get('http://localhost:9009/api/consumidor/obras/listar/tipo/' + req.query.tipo,{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObras_Consumidor',{obras: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -67,7 +67,7 @@ router.get('/obras/exportar',passport.authenticate('isConsumidor',{session:false
 // ******************************* Eventos ***************************************
 
 router.get('/eventos/listar',passport.authenticate('isConsumidor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/consumidor/eventos/listar')
+    axios.get('http://localhost:9009/api/consumidor/eventos/listar',{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('listarEventos_Consumidor',{eventos: dados.data})})
          .catch(erro => {

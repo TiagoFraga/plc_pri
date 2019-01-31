@@ -11,6 +11,7 @@ router.use(zip());
 
 
 router.get('/',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    console.log('Token Admin ' + req.session.token)
     res.render('admin')
 })
 
@@ -21,7 +22,7 @@ router.get('/users/registar',passport.authenticate('isAdmin',{session:false}),(r
 })
 
 router.get('/users/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/users/listar')
+    axios.get('http://localhost:9009/api/admin/users/listar',{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listaUsers',{users: dados.data}) })
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -30,7 +31,7 @@ router.get('/users/listar',passport.authenticate('isAdmin',{session:false}),(req
 })
 
 router.get('/users/listar/tipo',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/users/listar/tipo/'+ req.query.tipo)
+    axios.get('http://localhost:9009/api/admin/users/listar/tipo/'+ req.query.tipo,{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('listaUsers',{users: dados.data})})
          .catch(erro => {
@@ -40,7 +41,7 @@ router.get('/users/listar/tipo',passport.authenticate('isAdmin',{session:false})
 })
 
 router.post('/users/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/users/registar', req.body)
+    axios.post('http://localhost:9009/api/admin/users/registar', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/users/listar'))
         .catch(erro => {
             console.log('Erro na inserção do Utilizador: ' + erro)
@@ -49,7 +50,7 @@ router.post('/users/registar',passport.authenticate('isAdmin',{session:false}),(
 })
 
 router.post('/users/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/users/remover', req.body)
+    axios.post('http://localhost:9009/api/admin/users/remover', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/users/listar'))
         .catch(erro => {
             res.render('error', {error: erro, message: "Erro na remoção de Utilizador"})
@@ -57,7 +58,7 @@ router.post('/users/remover',passport.authenticate('isAdmin',{session:false}),(r
 })
 
 router.get('/users/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/users/atualizar/'+ req.query.username)
+    axios.get('http://localhost:9009/api/admin/users/atualizar/'+ req.query.username,{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('atualizaUser',{user: dados.data})})
          .catch(erro => {
@@ -67,7 +68,7 @@ router.get('/users/atualizar',passport.authenticate('isAdmin',{session:false}),(
 })
 
 router.post('/users/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/users/atualizar', req.body)
+    axios.post('http://localhost:9009/api/admin/users/atualizar', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/users/listar'))
         .catch(erro => {
             console.log('Erro na atualização do Utilizador: ' + erro)
@@ -78,7 +79,7 @@ router.post('/users/atualizar',passport.authenticate('isAdmin',{session:false}),
 // ******************************* Obras ***************************************
 
 router.get('/obras/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/obras/listar')
+    axios.get('http://localhost:9009/api/admin/obras/listar',{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObras',{obras: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -87,7 +88,7 @@ router.get('/obras/listar',passport.authenticate('isAdmin',{session:false}),(req
 })
 
 router.get('/obras/listar/obra/:obra',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/obras/listar/obra/' + req.params.obra)
+    axios.get('http://localhost:9009/api/admin/obras/listar/obra/' + req.params.obra,{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObra',{obra: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -96,7 +97,7 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isAdmin',{session:f
 })
 
 router.get('/obras/listar/tipo',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/obras/listar/tipo/' + req.query.tipo)
+    axios.get('http://localhost:9009/api/admin/obras/listar/tipo/' + req.query.tipo,{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObras',{obras: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -105,7 +106,7 @@ router.get('/obras/listar/tipo',passport.authenticate('isAdmin',{session:false})
 })
 
 router.post('/obras/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/obras/remover', req.body)
+    axios.post('http://localhost:9009/api/admin/obras/remover', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/obras/listar'))
         .catch(erro => {
             console.log('Erro na inserção da Notícia: ' + erro)
@@ -140,7 +141,7 @@ router.get('/noticias/registar',passport.authenticate('isAdmin',{session:false})
 
 router.post('/noticias/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     
-    axios.post('http://localhost:9009/api/admin/noticias/registar', req.body)
+    axios.post('http://localhost:9009/api/admin/noticias/registar', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
             console.log('Erro na inserção da Notícia: ' + erro)
@@ -150,7 +151,7 @@ router.post('/noticias/registar',passport.authenticate('isAdmin',{session:false}
 
 
 router.get('/noticias/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/noticias/listar')
+    axios.get('http://localhost:9009/api/admin/noticias/listar',{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('listarNoticias',{noticias: dados.data})})
          .catch(erro => {
@@ -160,7 +161,7 @@ router.get('/noticias/listar',passport.authenticate('isAdmin',{session:false}),(
 })
 
 router.post('/noticias/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/noticias/remover', req.body)
+    axios.post('http://localhost:9009/api/admin/noticias/remover', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
             console.log('Erro na remoção da Notícia: ' + erro)
@@ -169,7 +170,7 @@ router.post('/noticias/remover',passport.authenticate('isAdmin',{session:false})
 })
 
 router.post('/noticias/visibilidade',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/noticias/visibilidade', req.body)
+    axios.post('http://localhost:9009/api/admin/noticias/visibilidade', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
             console.log('Erro na alteração da visibilidade da Notícia: ' + erro)
@@ -178,7 +179,7 @@ router.post('/noticias/visibilidade',passport.authenticate('isAdmin',{session:fa
 })
 
 router.get('/noticias/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/noticias/atualizar/'+ req.query.id)
+    axios.get('http://localhost:9009/api/admin/noticias/atualizar/'+ req.query.id,{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('atualizaNoticia',{noticias: dados.data})})
          .catch(erro => {
@@ -189,7 +190,7 @@ router.get('/noticias/atualizar',passport.authenticate('isAdmin',{session:false}
 
 router.post('/noticias/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     console.log(req.body)
-    axios.post('http://localhost:9009/api/admin/noticias/atualizar', req.body)
+    axios.post('http://localhost:9009/api/admin/noticias/atualizar', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
             console.log('Erro na atualização da Notícia: ' + erro)
@@ -211,7 +212,7 @@ router.get('/eventos/inserir',passport.authenticate('isAdmin',{session:false}),(
 })
 
 router.get('/eventos/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/eventos/listar')
+    axios.get('http://localhost:9009/api/admin/eventos/listar',{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('listarEventos',{eventos: dados.data})})
          .catch(erro => {
@@ -222,7 +223,7 @@ router.get('/eventos/listar',passport.authenticate('isAdmin',{session:false}),(r
 })
 
 router.post('/eventos/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/eventos/registar', req.body)
+    axios.post('http://localhost:9009/api/admin/eventos/registar', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
         .catch(erro => {
             console.log('Erro na inserção do Evento: ' + erro)
@@ -262,7 +263,7 @@ router.post('/eventos/inserir',passport.authenticate('isAdmin',{session:false}),
 })
 
 router.post('/eventos/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/eventos/remover', req.body)
+    axios.post('http://localhost:9009/api/admin/eventos/remover', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
         .catch(erro => {
             console.log('Erro na inserção da Notícia: ' + erro)
@@ -271,7 +272,7 @@ router.post('/eventos/remover',passport.authenticate('isAdmin',{session:false}),
 })
 
 router.get('/eventos/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/eventos/atualizar/'+ req.query.id)
+    axios.get('http://localhost:9009/api/admin/eventos/atualizar/'+ req.query.id,{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             console.log(dados.data)
             res.render('atualizaEvento',{evento: dados.data})})
@@ -282,7 +283,7 @@ router.get('/eventos/atualizar',passport.authenticate('isAdmin',{session:false})
 })
 
 router.post('/eventos/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/admin/eventos/atualizar', req.body)
+    axios.post('http://localhost:9009/api/admin/eventos/atualizar', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
         .catch(erro => {
             console.log('Erro na atualização do Evento: ' + erro)
@@ -291,7 +292,7 @@ router.post('/eventos/atualizar',passport.authenticate('isAdmin',{session:false}
 })
 
 router.get('/eventos/exportar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/admin/eventos/listar')
+    axios.get('http://localhost:9009/api/admin/eventos/listar',{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
              var data = new Date()
              var file = './public/data/eventos/eventos_' + data + '.json' 

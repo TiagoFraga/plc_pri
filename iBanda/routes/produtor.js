@@ -25,7 +25,7 @@ router.get('/',passport.authenticate('isProdutor',{session:false}),(req, res) =>
 
 router.get('/obras/listar',passport.authenticate('isProdutor',{session:false}),(req, res) => {
     atualizaVisualizacoes()
-    axios.get('http://localhost:9009/api/produtor/obras/listar')
+    axios.get('http://localhost:9009/api/produtor/obras/listar',{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObras_Produtor',{obras: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -34,7 +34,7 @@ router.get('/obras/listar',passport.authenticate('isProdutor',{session:false}),(
 })
 
 router.get('/obras/listar/obra/:obra',passport.authenticate('isProdutor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/produtor/obras/listar/obra/' + req.params.obra)
+    axios.get('http://localhost:9009/api/produtor/obras/listar/obra/' + req.params.obra,{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObra_Produtor',{obra: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -43,7 +43,7 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isProdutor',{sessio
 })
 
 router.get('/obras/listar/tipo',passport.authenticate('isProdutor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/produtor/obras/listar/tipo/' + req.query.tipo)
+    axios.get('http://localhost:9009/api/produtor/obras/listar/tipo/' + req.query.tipo,{ headers: {"Authorization" : req.session.token}})
         .then(dados => {res.render('listarObras_Produtor',{obras: dados.data})})
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
@@ -56,7 +56,7 @@ router.get('/obras/inserir',passport.authenticate('isProdutor',{session:false}),
 })
 
 router.post('/obras/remover',passport.authenticate('isProdutor',{session:false}),(req, res) => {
-    axios.post('http://localhost:9009/api/produtor/obras/remover', req.body)
+    axios.post('http://localhost:9009/api/produtor/obras/remover', req.body,{ headers: {"Authorization" : req.session.token}})
         .then(()=> res.redirect('http://localhost:9009/produtor/obras/listar'))
         .catch(erro => {
             console.log('Erro na inserção da Notícia: ' + erro)
@@ -136,7 +136,7 @@ router.post('/obras/inserir',passport.authenticate('isProdutor',{session:false})
                                                                     var dirNameNovo = './public/catalogo/' + file._id
                                                                     fs.rename(dirNameAntigo,dirNameNovo,(erro)=>{
                                                                         if(!erro){
-                                                                            axios.post('http://localhost:9009/api/produtor/obras/inserir', file)
+                                                                            axios.post('http://localhost:9009/api/produtor/obras/inserir', file,{ headers: {"Authorization" : req.session.token}})
                                                                                 .then(dados => {res.render('listarObra_Produtor',{obra: dados.data})})
                                                                                 .catch(erro => {
                                                                                     console.log('Erro na listagem do Utilizador: ' + erro)
@@ -144,8 +144,7 @@ router.post('/obras/inserir',passport.authenticate('isProdutor',{session:false})
                                                                             })
 
                                                                         }else{
-                                                                            console.log("Deu Merda")
-                                                                            axios.post('http://localhost:9009/api/produtor/obras/inserir', file)
+                                                                            axios.post('http://localhost:9009/api/produtor/obras/inserir', file,{ headers: {"Authorization" : req.session.token}})
                                                                                 .then(dados => {res.render('listarObra_Produtor',{obra: dados.data})})
                                                                                 .catch(erro => {
                                                                                     fsExtra.remove('./public/catalogo/' + files[0], (erro)=>{
@@ -231,7 +230,7 @@ function manifesto_obras(manifesto, pasta){
 // ******************************* Eventos ***************************************
 
 router.get('/eventos/listar',passport.authenticate('isProdutor',{session:false}),(req, res) => {
-    axios.get('http://localhost:9009/api/produtor/eventos/listar')
+    axios.get('http://localhost:9009/api/produtor/eventos/listar',{ headers: {"Authorization" : req.session.token}})
          .then(dados => {
             res.render('listarEventos_Produtor',{eventos: dados.data})})
          .catch(erro => {

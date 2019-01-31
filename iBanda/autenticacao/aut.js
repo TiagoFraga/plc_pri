@@ -42,14 +42,17 @@ passport.deserializeUser(function(user, done) {
 var extractFromSession = (req) => {
     var token = null
     if(req && req.session) token = req.session.token
+    if(!token && req.headers.authorization) token = req.headers.authorization
     return token
 }
 
 passport.use('isAdmin',new JWTstrategy({
     secretOrKey: "pri2018",
-    jwtFromRequest: ExtractJWT.fromExtractors([extractFromSession])
-},async(token,done)=>{
+    jwtFromRequest: ExtractJWT.fromExtractors([extractFromSession]),
+    passReqToCallback: true
+},async(req,token,done)=>{
     try {
+
         if(token.user.userType == 'Admin'){
             return done(null,token.user)
         } 
