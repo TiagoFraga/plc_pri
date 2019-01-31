@@ -38,6 +38,7 @@ block content
                                 td= horario
                                 td= e.local
                                 td= e.informacao
+                br
                 .w3-col.m4.l3
                     ul.w3-ul.w3-center
                         li
@@ -50,6 +51,11 @@ block content
                                 input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')
+                        li
+                            form.w3-container(method="GET" action="/admin/eventos/exportar")
+                                br
+                                input.w3-btn.w3-black(type="submit" value="Exportar" id='exportar')
+                                br
            
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey

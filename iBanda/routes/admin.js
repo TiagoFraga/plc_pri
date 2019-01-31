@@ -6,6 +6,8 @@ var formidable = require('formidable')
 var jsonfile = require('jsonfile')
 var fs = require('fs')
 var Evento = require('../controllers/evento')
+var zip = require('express-easy-zip')
+router.use(zip());
 
 
 router.get('/',passport.authenticate('isAdmin',{session:false}),(req, res) => {
@@ -20,7 +22,7 @@ router.get('/users/registar',passport.authenticate('isAdmin',{session:false}),(r
 
 router.get('/users/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     axios.get('http://localhost:9009/api/admin/users/listar')
-.then(dados => {res.render('listaUsers',{users: dados.data}) })
+        .then(dados => {res.render('listaUsers',{users: dados.data}) })
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
             res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
@@ -108,6 +110,23 @@ router.post('/obras/remover',passport.authenticate('isAdmin',{session:false}),(r
         .catch(erro => {
             console.log('Erro na inserção da Notícia: ' + erro)
             res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+    })
+})
+
+
+router.get('/obras/exportar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    var dirPath = __dirname + "/../public/catalogo/" + req.query.id;
+    res.zip({
+        files: [
+            {},
+            // nome da pasta para fazer o zip
+            { 
+              path: dirPath,
+              name: req.query.id 
+            } 
+        ],
+        // nome do zip
+        filename: req.query.id + '.zip'
     })
 })
 
@@ -270,6 +289,69 @@ router.post('/eventos/atualizar',passport.authenticate('isAdmin',{session:false}
             res.render('error', {error: erro, message: "Erro na atualização do Evento"})
     })
 })
+
+router.get('/eventos/exportar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/admin/eventos/listar')
+         .then(dados => {
+             var data = new Date()
+             var file = './public/data/eventos/eventos_' + data + '.json' 
+             jsonfile.writeFile(file,dados.data,(erro)=>{
+                if(!erro){
+                    res.zip({
+                        files: [
+                            {},
+                            // nome da pasta para fazer o zip
+                            { 
+                              path: file,
+                              name: 'eventos_' + data + '.json'
+                            } 
+                        ],
+                        // nome do zip
+                        filename: 'eventos_' + data + '.zip'
+                    })
+                }else{
+                    console.log("O ficheiro ja está criado")
+                }
+             })
+           })
+         .catch(erro => {
+                console.log('Erro na exportação de Eventos: ' + erro)
+                res.render('error', {error: erro, message: "Erro na listagem de Eventos"})
+         })
+    
+})
+
+// ******************************* Logs ***************************************
+
+router.get('/logs/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    var file = './public/data/logs/logs.json'
+    jsonfile.readFile(file,(erro,data)=>{
+       if(!erro){
+           res.render('listarLogs',{logs: data})
+       }else{
+           res.render('error', {error: erro, message: "Erro na listagem dos logs"})
+       } 
+    })
+})
+
+
+router.get('/logs/exportar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    var data = new Date()
+    var file = './public/data/logs/logs.json'
+    res.zip({
+        files: [
+            {},
+            // nome da pasta para fazer o zip
+            { 
+              path: file,
+              name: 'logs_' + data + '.json'
+            } 
+        ],
+        // nome do zip
+        filename: 'logs_' + data + '.zip'
+    })
+})
+
 
 
 

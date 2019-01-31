@@ -1,5 +1,5 @@
 [{"data": "31/12/2019","horario":{"hinicio":"12:53","hfim":"15:53"},"tipo":"Concerto","designacao":"Concerto","local":"Braga","informacao":"nada"},
-{"data": "2/2/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoLista","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
-{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"Ok","designacao":"f","local":"Braga","informacao":"nada"},
-{"data": "3/3/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"S","designacao":"e","local":"Braga","informacao":"nada"},
-{"data":"4/4/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"d","designacao":"h","local":"Braga","informacao":"nada"}]
+{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
+{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
+{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
+{"data":"1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"}]

@@ -31,7 +31,9 @@
     "save": "^2.3.3",
     "session-file-store": "^1.2.0",
     "unzip": "^0.1.11",
-    "uuid": "^3.3.2"
+    "update-json-file": "^1.1.1",
+    "uuid": "^3.3.2",
+    "zip": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

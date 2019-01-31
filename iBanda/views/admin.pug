@@ -31,9 +31,6 @@ block content
                               li
                                 form.w3-container(action='/admin/obras/listar',method='GET')
                                     input.w3-btn.w3-hover-grey(type='submit',value='Listar')
-                              li
-                                form.w3-container(action='/admin/obras/exportar',method='GET')
-                                    input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
                         hr
                         .w3-bar-item.w3-center
                             h2 
@@ -52,27 +49,21 @@ block content
                           ul.w3-ul
                             li
                               form.w3-container(action='/admin/eventos/registar',method='GET')
-                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir Manualmente')
+                                input.w3-btn.w3-hover-grey(type='submit',value='Inserir')
                             li
                               form.w3-container(action='/admin/eventos/inserir',method='GET')
                                 input.w3-btn.w3-hover-grey(type='submit',value='Inserir Ficheiro')
                             li
                               form.w3-container(action='/admin/eventos/listar',method='GET')
                                 input.w3-btn.w3-hover-grey(type='submit',value='Listar')
-                            li
-                              form.w3-container(action='/admin/eventos/exportar',method='GET')
-                                input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
                         hr
                         .w3-bar-item.w3-center 
                           h2
                             b Estatistica
                           ul.w3-ul
                             li
-                                form.w3-container(action='/admin/logs/visualizacao',method='GET')
+                                form.w3-container(action='/admin/logs/listar',method='GET')
                                     input.w3-btn.w3-hover-grey(type='submit',value='Visualizar')
-                            li
-                                form.w3-container(action='/admin/logs/download',method='GET')
-                                    input.w3-btn.w3-hover-grey(type='submit',value='Exportar')
                         hr
                 .w3-col.m8.l9
                   h3.w3-center Bem-Vindo Admnistrador!

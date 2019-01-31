@@ -8,7 +8,7 @@ var NoticiaSchema = new Schema (
         titulo: {type: String, required: true},
         corpo: {type: String, required: true},
         data: {type: String, required: true },
-        visibilidade: {type: Boolean, required: true},
+        visibilidade: {type: Boolean, required: true}
     }
 )
 

@@ -9,13 +9,12 @@ var fs = require('fs')
 var fsExtra = require('fs-extra')
 var JSZip = require("jszip");
 var formidable = require('formidable')
+const updateJsonFile = require('update-json-file')
 var jsonfile = require('jsonfile')
 router.use(zip());
 
 const StreamZip = require('node-stream-zip');
 var myBD = __dirname + "/../public/data/ficheiros.json"
-console.log('BD in: ' + __dirname + '/../public/data')
-
 
 
 router.get('/',passport.authenticate('isProdutor',{session:false}),(req, res) => {
@@ -25,6 +24,7 @@ router.get('/',passport.authenticate('isProdutor',{session:false}),(req, res) =>
 // ******************************* Obras ***************************************
 
 router.get('/obras/listar',passport.authenticate('isProdutor',{session:false}),(req, res) => {
+    atualizaVisualizacoes()
     axios.get('http://localhost:9009/api/produtor/obras/listar')
         .then(dados => {res.render('listarObras_Produtor',{obras: dados.data})})
         .catch(erro => {
@@ -61,6 +61,23 @@ router.post('/obras/remover',passport.authenticate('isProdutor',{session:false})
         .catch(erro => {
             console.log('Erro na inserção da Notícia: ' + erro)
             res.render('error', {error: erro, message: "Erro na inserção da Notícia"})
+    })
+})
+
+router.get('/obras/exportar',passport.authenticate('isProdutor',{session:false}),(req, res) => {
+    atualizaDownloads()
+    var dirPath = __dirname + "/../public/catalogo/" + req.query.id;
+    res.zip({
+        files: [
+            {},
+            // nome da pasta para fazer o zip
+            { 
+              path: dirPath,
+              name: req.query.id 
+            } 
+        ],
+        // nome do zip
+        filename: req.query.id + '.zip'
     })
 })
 
@@ -224,6 +241,25 @@ router.get('/eventos/listar',passport.authenticate('isProdutor',{session:false})
     
 })
 
+// ******************************* Extra ***************************************
+
+function atualizaVisualizacoes(){
+    var file = './public/data/logs/logs.json'
+    updateJsonFile(file, (data) => {
+        data.total.visualizacoes = data.total.visualizacoes + 1
+        data.produtor.visualizacoes = data.produtor.visualizacoes + 1    
+        return data
+    })
+}
+
+function atualizaDownloads(){
+    var file = './public/data/logs/logs.json'
+    updateJsonFile(file, (data) => {
+        data.total.visualizacoes = data.total.visualizacoes + 1
+        data.produtor.visualizacoes = data.produtor.visualizacoes + 1    
+        return data
+    }) 
+}
 
 
 module.exports = router;
