@@ -19,7 +19,7 @@ Users.consultar = uname => {
 // Função para listar os utilizadores por tipo
 Users.listarTipo = tipo => {
     return User
-        .findOne({userType: tipo})
+        .find({userType: tipo})
         .exec()
 }
 

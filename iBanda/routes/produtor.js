@@ -42,6 +42,15 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isProdutor',{sessio
     })
 })
 
+router.get('/obras/listar/tipo',passport.authenticate('isProdutor',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/produtor/obras/listar/tipo/' + req.query.tipo)
+        .then(dados => {res.render('listarObras_Produtor',{obras: dados.data})})
+        .catch(erro => {
+            console.log('Erro na listagem do Utilizador: ' + erro)
+            res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
+    })
+})
+
 router.get('/obras/inserir',passport.authenticate('isProdutor',{session:false}),(req, res) => {
     res.render('inserirObra_Produtor')
 })

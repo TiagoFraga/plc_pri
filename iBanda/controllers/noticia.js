@@ -17,23 +17,26 @@ Noticias.obter = id =>{
 
 // Função para adicionar uma notícia a base de dados
 Noticias.adicionar = async n =>{
-    await Noticia.count({},(erro,count) =>{
-        if(!erro){
-            var id = count +1
-            var noticia = new Noticia({
-                _id: id,
-                titulo: n.titulo,
-                corpo: n.corpo,
-                data: n.data,
-                visibilidade: true,
-            })
-
-            return Noticia.create(noticia)
-        }
-        else{
-            console.log('Erro: ' + erro )
-        }
+    var not = await Noticia.findOne()
+                           .sort({_id: -1})
+                           .limit(1)
+                           .exec()
+    if(not == null){
+        var id = 1
+    }
+    else{
+        var id = not._id + 1
+    }
+    
+    var noticia = new Noticia({
+        _id: id,
+        titulo: n.titulo,
+        corpo: n.corpo,
+        data: n.data,
+        visibilidade: true
     })
+
+    return Noticia.create(noticia)
 }
 
 // Função para atualizar uma notícia

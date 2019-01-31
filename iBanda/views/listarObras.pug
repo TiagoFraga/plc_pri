@@ -40,6 +40,14 @@ block content
                                 input.w3-input.w3-border(type="text" name="id" placeholder="ID")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Remover" id='remover')
+                        li
+                            p
+                                b Nota:
+                            p Se o Tipo Contiver "/" escrever tipo com a 1ª Palavra.
+                            form.w3-container(method="GET" action="/admin/obras/listar/tipo")
+                                input.w3-input.w3-border(type="text" name="tipo" placeholder="Tipo")
+                                br
+                                input.w3-btn.w3-black(type="submit" value="listarTipo" id='listarTipo')
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey
       address iBandaApp by JG/TF copyrights reserved.

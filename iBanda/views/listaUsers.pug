@@ -43,6 +43,11 @@ block content
                                 input.w3-input.w3-border(type="text" name="username" placeholder="Username")
                                 br
                                 input.w3-btn.w3-black(type="submit" value="Atualizar" id='atualizar')
+                        li
+                            form.w3-container(method="GET" action="/admin/users/listar/tipo")
+                                input.w3-input.w3-border(type="text" name="tipo" placeholder="Tipo")
+                                br
+                                input.w3-btn.w3-black(type= "submit" value= "Listar Por Tipo" id= 'listarTipo')
            
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey

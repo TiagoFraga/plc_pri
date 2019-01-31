@@ -5,8 +5,7 @@ var passport = require('passport')
 var formidable = require('formidable')
 var jsonfile = require('jsonfile')
 var fs = require('fs')
-
-
+var Evento = require('../controllers/evento')
 
 
 router.get('/',passport.authenticate('isAdmin',{session:false}),(req, res) => {
@@ -21,11 +20,21 @@ router.get('/users/registar',passport.authenticate('isAdmin',{session:false}),(r
 
 router.get('/users/listar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     axios.get('http://localhost:9009/api/admin/users/listar')
-        .then(dados => {res.render('listaUsers',{users: dados.data})})
+.then(dados => {res.render('listaUsers',{users: dados.data}) })
         .catch(erro => {
             console.log('Erro na listagem do Utilizador: ' + erro)
             res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
     })
+})
+
+router.get('/users/listar/tipo',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/admin/users/listar/tipo/'+ req.query.tipo)
+         .then(dados => {
+            res.render('listaUsers',{users: dados.data})})
+         .catch(erro => {
+                console.log('Erro na listagem de Utilizadores: ' + erro)
+                res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
+         })
 })
 
 router.post('/users/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
@@ -46,7 +55,6 @@ router.post('/users/remover',passport.authenticate('isAdmin',{session:false}),(r
 })
 
 router.get('/users/atualizar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
-    console.log(req.query.username)
     axios.get('http://localhost:9009/api/admin/users/atualizar/'+ req.query.username)
          .then(dados => {
             res.render('atualizaUser',{user: dados.data})})
@@ -85,6 +93,15 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isAdmin',{session:f
     })
 })
 
+router.get('/obras/listar/tipo',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/admin/obras/listar/tipo/' + req.query.tipo)
+        .then(dados => {res.render('listarObras',{obras: dados.data})})
+        .catch(erro => {
+            console.log('Erro na listagem do Utilizador: ' + erro)
+            res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
+    })
+})
+
 router.post('/obras/remover',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     axios.post('http://localhost:9009/api/admin/obras/remover', req.body)
         .then(()=> res.redirect('http://localhost:9009/admin/obras/listar'))
@@ -103,6 +120,7 @@ router.get('/noticias/registar',passport.authenticate('isAdmin',{session:false})
 })
 
 router.post('/noticias/registar',passport.authenticate('isAdmin',{session:false}),(req, res) => {
+    
     axios.post('http://localhost:9009/api/admin/noticias/registar', req.body)
         .then(()=> res.redirect('http://localhost:9009/admin/noticias/listar'))
         .catch(erro => {
@@ -195,20 +213,21 @@ router.post('/eventos/registar',passport.authenticate('isAdmin',{session:false})
 
 router.post('/eventos/inserir',passport.authenticate('isAdmin',{session:false}),(req, res) => {
     var form = new formidable.IncomingForm()
-    form.parse(req,(erro,fields,files)=>{
+    form.parse(req,async (erro,fields,files)=>{
         if(!erro){
             var fenviado = files.ficheiro.path
             var fnovo = './public/uploadedGramatica/'+files.ficheiro.name
             fs.rename(fenviado,fnovo,(erro)=>{
             if(!erro){
-                    jsonfile.readFile(fnovo,(erro, eventos)=>{
+                    jsonfile.readFile(fnovo,async(erro, eventos)=>{
                         if(!erro){
-                            axios.post('http://localhost:9009/api/admin/eventos/inserir', eventos)
-                            .then(()=> res.redirect('http://localhost:9009/admin/eventos/listar'))
-                            .catch(erro => {
-                                console.log('Erro na inserção do Evento: ' + erro)
-                                res.render('error', {error: erro, message: "Erro na inserção do Evento"})
-                            })
+                            console.log(eventos)
+                            for(var i in eventos){
+                              await Evento.inserirPorFicheiro(eventos[i])
+                                      .then(dados => console.log(dados))
+                                      .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
+                            }
+                            await res.redirect('http://localhost:9009/admin/eventos/listar')
                         }else{
                         console.log("Nao consegui ler o ficheiro ")
                         }

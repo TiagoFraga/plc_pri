@@ -16,7 +16,9 @@ block content
     .w3-card-4
         header.w3-grey.w3-center
             h2.w3-text-white Lista de Obras
-        .w3-container.w3-responsive
+        .w3-container
+            .w3-row
+                .w3-col.m6.l7.w3-responsive
                     table.w3-table-all
                         tr
                             th ID:
@@ -31,6 +33,16 @@ block content
                                 td= o.tipo
                                 td= o.compositor
                     br
+                .w3-col.m4.l3
+                    ul.w3-ul.w3-center
+                        li
+                            p
+                                b Nota:
+                            p Se o Tipo Contiver "/" escrever tipo com a 1ª Palavra.
+                            form.w3-container(method="GET" action="/consumidor/obras/listar/tipo")
+                                input.w3-input.w3-border(type="text" name="tipo" placeholder="Tipo")
+                                br
+                                input.w3-btn.w3-black(type="submit" value="listarTipo" id='listarTipo')
   .w3-container.w3-center.w3-bottom
     footer.w3-container.w3-dark-grey
       address iBandaApp by JG/TF copyrights reserved.

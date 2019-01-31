@@ -31,6 +31,15 @@ router.get('/obras/listar/obra/:obra',passport.authenticate('isConsumidor',{sess
     })
 })
 
+router.get('/obras/listar/tipo',passport.authenticate('isConsumidor',{session:false}),(req, res) => {
+    axios.get('http://localhost:9009/api/consumidor/obras/listar/tipo/' + req.query.tipo)
+        .then(dados => {res.render('listarObras_Consumidor',{obras: dados.data})})
+        .catch(erro => {
+            console.log('Erro na listagem do Utilizador: ' + erro)
+            res.render('error', {error: erro, message: "Erro na listagem de Utilizadores"})
+    })
+})
+
 
 // ******************************* Eventos ***************************************
 

@@ -25,14 +25,14 @@ router.get('/obras/listar/obra/:obra',(req,res) =>{
 // Rota da api para listar as obras por tipo
 router.get('/obras/listar/tipo/:tipo',(req,res) =>{
     Obra.listarTipo(req.params.tipo)
-        .then(dados => res.jsonp(dados))
+        .then(dados => { res.jsonp(dados)})
         .catch(erro => res.status(500).send('Erro na listagem das Obras: ' + erro))
 })
 
 // Rota da api para remover uma obra da base de dados
 router.post('/obras/remover',(req,res) =>{
     Obra.remove(req.body.id)
-        .then(dados => res.jsonp(dados))
+        .then(dados =>{res.jsonp(dados)})
         .catch(erro => res.status(500).send('Erro na remoção da Obra: ' + erro))
 })
 
@@ -63,7 +63,7 @@ router.get('/users/listar/user/:user',(req,res) =>{
 // Rota da api para listar os utilizadores por tipo
 router.get('/users/listar/tipo/:tipo',(req,res) =>{
     User.listarTipo(req.params.tipo)
-        .then(dados => res.jsonp(dados))
+        .then(dados => { res.jsonp(dados)})
         .catch(erro => res.status(500).send('Erro na listagem dos Utilizadores: ' + erro))
 })
 
@@ -186,9 +186,9 @@ router.post('/eventos/registar',(req,res) => {
 router.post('/eventos/inserir',async (req,res) => {
     for(var i in req.body){
         console.log("API : " + JSON.stringify(req.body[i]))
-        await Evento.inserir(req.body[i])
-        .then(dados => res.jsonp(dados))
-        .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
+        await Evento.inserirPorFicheiro(req.body[i])
+                    .then(dados => res.jsonp(dados))
+                    .catch(erro => res.status(500).send('Erro: Erro na inserção do Evento: ' + erro))
     }
 })
 

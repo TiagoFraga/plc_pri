@@ -16,7 +16,8 @@ Obras.consultar = id =>{
         .exec()
 }
 // Função para listar todas as obras por tipo
-Obras.listarTipo = tipo =>{
+Obras.listarTipo = t =>{
+    var tipo = new RegExp(t, "i")
     return Obra
         .find({tipo: tipo})
         .exec()

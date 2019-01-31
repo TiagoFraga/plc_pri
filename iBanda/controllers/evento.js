@@ -42,27 +42,53 @@ Eventos.consultar = eid =>{
 
 //Insere um novo evento
 Eventos.inserir = async e =>{
-    await Evento.count({},(erro,count) =>{
-        if(!erro){
-            var id = count +1
-            console.log("ID: " + id)
-            var evento = new Evento({
-                _id: id,
-                data: e.data,
-                horario: { hinicio: e.hinicio, hfim: e.hfim},
-                tipo: e.tipo,
-                designacao: e.designacao,
-                local: e.local,
-                informacao: e.informacao
-            })
-
-            return Evento.create(evento)
-        }
-        else{
-            console.log('Erro: ' + erro )
-        }
+    var eve = await Evento.findOne()
+                          .sort({_id: -1})
+                          .limit(1)
+                          .exec()
+    if(eve == null){
+        var id = 1
+    }
+    else{
+        var id = eve._id + 1
+    }
+    var evento = new Evento({
+        _id: id,
+        data: e.data,
+        horario: { hinicio: e.hinicio, hfim: e.hfim},
+        tipo: e.tipo,
+        designacao: e.designacao,
+        local: e.local,
+        informacao: e.informacao
     })
+    return Evento.create(evento)
 }
+
+Eventos.inserirPorFicheiro = async e =>{
+    var eve = await Evento.findOne()
+                          .sort({_id: -1})
+                          .limit(1)
+                          .exec()
+    
+    if(eve == null){
+        var id = 1
+    }
+    else{
+        var id = eve._id + 1
+        
+    }
+    var evento = new Evento({
+        _id: id,
+        data: e.data,
+        horario: { hinicio: e.horario.hinicio, hfim: e.horario.hfim},
+        tipo: e.tipo,
+        designacao: e.designacao,
+        local: e.local,
+        informacao: e.informacao
+    })
+    return Evento.create(evento)
+}
+
 
 //Remove um evento, dado o seu id
 Eventos.remover = eid => {
