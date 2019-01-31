@@ -1,14 +1,14 @@
 {
 	"total": {
-		"visualizacoes": 1,
-		"downloads": 1
+		"visualizacoes": 5,
+		"downloads": 0
 	},
 	"produtor": {
-		"visualizacoes": 0,
+		"visualizacoes": 3,
 		"downloads": 0
 	},
 	"consumidor": {
-		"visualizacoes": 1,
-		"downloads": 1
+		"visualizacoes": 2,
+		"downloads": 0
 	}
 }

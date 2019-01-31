@@ -254,8 +254,8 @@ function atualizaVisualizacoes(){
 function atualizaDownloads(){
     var file = './public/data/logs/logs.json'
     updateJsonFile(file, (data) => {
-        data.total.visualizacoes = data.total.visualizacoes + 1
-        data.produtor.visualizacoes = data.produtor.visualizacoes + 1    
+        data.total.downloads = data.total.downloads + 1
+        data.produtor.downloads = data.produtor.downloads + 1    
         return data
     }) 
 }

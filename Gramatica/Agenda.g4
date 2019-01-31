@@ -187,7 +187,7 @@ agenda returns[int totalEventos,HashMap<Integer,Evento> listaEventos]
                                   int count = 1;
                                   for(Integer i : $agenda.listaEventos.keySet()){
                                     if(count == 1){
-                                         json = "[{\"data \": \""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
+                                         json = "[{\"data\": \""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
                                            $agenda.listaEventos.get(i).getHorario().getHinicio().replaceAll("'","").replaceAll("_"," ")+ "\",\"hfim\":\"" + $agenda.listaEventos.get(i).getHorario().getHfim().replaceAll("'","").replaceAll("_"," ") +
                                             "\"},\"tipo\":\"" + $agenda.listaEventos.get(i).getTipo().replaceAll("'","").replaceAll("_"," ") + "\",\"designacao\":\"" + $agenda.listaEventos.get(i).getDesignacao().replaceAll("'","").replaceAll("_"," ")+ 
                                             "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ") + "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ")+ "\"},\n";
@@ -200,7 +200,7 @@ agenda returns[int totalEventos,HashMap<Integer,Evento> listaEventos]
                                             "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ")+ "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ") + "\"}]"; 
                                     }    
                                     else{
-                                        json = "{\"data \": \""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
+                                        json = "{\"data\": \""+ $agenda.listaEventos.get(i).getData().replaceAll("'","").replaceAll("_"," ")+ "\",\"horario\":{\"hinicio\":\"" + 
                                            $agenda.listaEventos.get(i).getHorario().getHinicio().replaceAll("'","").replaceAll("_"," ")+ "\",\"hfim\":\"" + $agenda.listaEventos.get(i).getHorario().getHfim().replaceAll("'","").replaceAll("_"," ") +
                                             "\"},\"tipo\":\"" + $agenda.listaEventos.get(i).getTipo().replaceAll("'","").replaceAll("_"," ") + "\",\"designacao\":\"" + $agenda.listaEventos.get(i).getDesignacao().replaceAll("'","").replaceAll("_"," ")+ 
                                             "\",\"local\":\"" + $agenda.listaEventos.get(i).getLocal().replaceAll("'","").replaceAll("_"," ") + "\",\"informacao\":\"" + $agenda.listaEventos.get(i).getInformacao().replaceAll("'","").replaceAll("_"," ")+ "\"},\n"; 

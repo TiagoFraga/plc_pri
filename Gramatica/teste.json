@@ -1,5 +1,4 @@
-[{"data": "31/12/2019","horario":{"hinicio":"12:53","hfim":"15:53"},"tipo":"Concerto","designacao":"Concerto","local":"Braga","informacao":"nada"},
-{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
-{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
-{"data": "1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"},
-{"data":"1/1/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"ConcertoL","designacao":"ConcertoL","local":"Braga","informacao":"nada"}]
+[{"data": "1/2/2019","horario":{"hinicio":"20:45","hfim":"21:45"},"tipo":"Concerto","designacao":"Concerto","local":"Braga","informacao":"nada"},
+{"data": "4/4/2019","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"Desfile","designacao":"Desfile","local":"Braga","informacao":"Gratuito"},
+{"data": "3/5/2020","horario":{"hinicio":"15:53","hfim":"17:53"},"tipo":"Concerto","designacao":"Cultural","local":"Esposende","informacao":"Gratuito"},
+{"data":"8/12/2019","horario":{"hinicio":"20:53","hfim":"21:53"},"tipo":"Concerto","designacao":"Espetaculo","local":"Braga","informacao":"Pago"}]
